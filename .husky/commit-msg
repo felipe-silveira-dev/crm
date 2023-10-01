@@ -17,7 +17,7 @@ if [ -z "$ISSUE_ID" ]; then
 fi
 
 # Validar o padrão da mensagem de commit
-if [[ $COMMIT_MESSAGE == $ISSUE_ID* ]]; then
+if [ $COMMIT_MESSAGE == $ISSUE_ID* ]; then
   exit 0
 fi
 
