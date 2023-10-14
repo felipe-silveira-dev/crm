@@ -9,7 +9,9 @@ use Livewire\Livewire;
 use function Pest\Laravel\get;
 
 test('need to have a route  to passord recovery', function () {
-    get(route('auth.password.recovery'))->assertOk();
+    get(route('auth.password.recovery'))
+        ->assertSeeLivewire('auth.password.recovery')
+        ->assertOk();
 });
 
 it('should be able to request for a password recovery', function () {
