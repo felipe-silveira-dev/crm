@@ -5,25 +5,26 @@ namespace App\Livewire\Auth;
 use Illuminate\Contracts\View\{View};
 use Illuminate\Support\Facades\{Auth, RateLimiter};
 use Illuminate\Support\Str;
+use Livewire\Attributes\{Layout, Rule};
 use Livewire\Component;
 
 class Login extends Component
 {
+    #[Rule(['required', 'email'])]
     public ?string $email = null;
 
+    #[Rule(['required'])]
     public ?string $password = null;
 
+    #[Layout('components.layouts.guest')]
     public function render(): View
     {
-        return view('livewire.auth.login')->layout('components.layouts.guest');
+        return view('livewire.auth.login');
     }
 
     public function tryToLogin(): void
     {
-        $this->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $this->validate();
 
         if($this->ensureIsNotRateLimiting()) {
             return;
