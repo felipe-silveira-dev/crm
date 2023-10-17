@@ -20,7 +20,7 @@ class Recovery extends Component
         return view('livewire.auth.password.recovery');
     }
 
-    public function recoverPassword(): void
+    public function startPasswordRecovery(): void
     {
         $this->validate();
 

@@ -1,5 +1,11 @@
 <x-card title="Login" shadow class="mx-auto w-[450px]">
 
+    @if (session()->has('status'))
+        <x-alert icon="o-exclamation-triangle" class="mb-4 alert-error">
+            {{ session('status') }}
+        </x-alert>
+    @endif
+
     @if($errors->hasAny(['invalidCredentials', 'rateLimiter']))
         <x-alert icon="o-exclamation-triangle" class="mb-4 alert-warning">
             @error('invalidCredentials')
