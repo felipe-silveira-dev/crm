@@ -23,7 +23,7 @@ it('should be able to request for a password recovery', function () {
     Livewire::test(Recovery::class)
         ->assertDontSee('We have e-mailed your password reset link!')
         ->set('email', $user->email)
-        ->call('recoverPassword')
+        ->call('startPasswordRecovery')
         ->assertSee('We have e-mailed your password reset link!');
 
     Notification::assertSentTo($user, ResetPassword::class);
@@ -32,7 +32,7 @@ it('should be able to request for a password recovery', function () {
 test('email property', function ($value, $rule) {
     Livewire::test(Recovery::class)
         ->set('email', $value)
-        ->call('recoverPassword')
+        ->call('startPasswordRecovery')
         ->assertHasErrors(['email' => $rule]);
 })->with([
     'required' => ['value' => '', 'rule' => 'required'],
@@ -46,7 +46,7 @@ test('needs to create a token when requesting for a password recovery', function
     Livewire::test(Recovery::class)
         ->assertDontSee('We have e-mailed your password reset link!')
         ->set('email', $user->email)
-        ->call('recoverPassword');
+        ->call('startPasswordRecovery');
 
     assertDatabaseCount('password_reset_tokens', 1);
     assertDatabaseHas('password_reset_tokens', [
