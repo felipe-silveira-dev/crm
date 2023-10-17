@@ -6,7 +6,7 @@
         </x-alert>
     @endif
 
-    <x-form wire:submit="recoverPassword">
+    <x-form wire:submit="startPasswordRecovery">
         <x-input label="Email" wire:model="email" />
         <x-slot:actions>
             <div class="flex items-center justify-between w-full">
