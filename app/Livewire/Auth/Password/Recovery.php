@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Auth\Password;
 
-use App\Models\User;
-use App\Notifications\PasswordRecoveryNotification;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\{Layout, Rule};
 use Livewire\Component;
 
@@ -24,9 +23,8 @@ class Recovery extends Component
     public function recoverPassword(): void
     {
         $this->validate();
-        $user = User::where('email', $this->email)->first();
 
-        $user?->notify(new PasswordRecoveryNotification());
+        Password::sendResetLink(['email' => $this->email]);
 
         $this->message = 'We have e-mailed your password reset link!';
     }

@@ -26,7 +26,7 @@
             </div>
         </x-slot:actions>
         <div class="flex items-center justify-between w-full mt-4">
-            <a wire:navigate href="{{ route('auth.password.recovery') }}" class="link link-primary">
+            <a wire:navigate href="{{ route('password.recovery') }}" class="link link-primary">
                 I forgot my password
             </a>
         </div>
