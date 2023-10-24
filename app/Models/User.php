@@ -14,6 +14,7 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use HasPermissions;
 
     protected $fillable = [
         'name',
@@ -34,15 +35,5 @@ class User extends Authenticatable
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
-    }
-
-    public function givePermissionTo(string $key): void
-    {
-        $this->permissions()->firstOrCreate(['key' => $key]);
-    }
-
-    public function hasPermissionTo(string $key): bool
-    {
-        return $this->permissions()->where('key', '=', $key)->exists();
     }
 }
