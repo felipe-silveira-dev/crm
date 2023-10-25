@@ -54,3 +54,27 @@ test('table format', function () {
             ['key' => 'actions', 'label' => 'Actions'],
         ]);
 });
+
+it('should be able to filter by name and email', function () {
+    $admin = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@crm.com']);
+    $mario = User::factory()->create(['name' => 'Mario Silva', 'email' => 'little_guy@gmail.com']);
+
+    actingAs($admin);
+
+    $lw = Livewire::test(Index::class);
+    $lw->assertSet('users', function ($users) {
+        expect($users)
+            ->toBeInstanceOf(LengthAwarePaginator::class)
+            ->toHaveCount(2);
+
+        return true;
+    })
+    ->set('search', 'Mario')
+    ->assertSet('users', function ($users) {
+        expect($users)
+            ->toHaveCount(1)
+            ->first()->name->toBe('Mario Silva');
+
+        return true;
+    });
+});
