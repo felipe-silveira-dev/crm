@@ -2,6 +2,7 @@
 
 use App\Enums\Can;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Users\Index;
 use App\Livewire\Auth\Password\{Recovery, Reset};
 use App\Livewire\Auth\{Login, Register};
 use App\Livewire\Welcome;
@@ -22,7 +23,7 @@ Route::middleware('auth')->group(function () {
     #region Admin
     Route::prefix('/admin')->middleware('can:' . Can::BE_AN_ADMIN->value)->group(function () {
         Route::get('/', Dashboard::class)->name('admin.dashboard');
-        Route::get('/users', fn () => 'admin.users')->name('admin.users');
+        Route::get('/users', Index::class)->name('admin.users');
     });
     #endregion
 

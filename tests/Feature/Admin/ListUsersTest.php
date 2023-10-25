@@ -40,3 +40,17 @@ it('should list all users in the page', function () {
         $lw->assertSee($user->name);
     }
 });
+
+test('table format', function () {
+
+    actingAs(User::factory()->admin()->create());
+
+    Livewire::test(Index::class)
+        ->assertSet('headers', [
+            ['key' => 'id', 'label' => '#'],
+            ['key' => 'name', 'label' => 'Name'],
+            ['key' => 'email', 'label' => 'Email'],
+            ['key' => 'permissions', 'label' => 'Permissions'],
+            ['key' => 'actions', 'label' => 'Actions'],
+        ]);
+});
