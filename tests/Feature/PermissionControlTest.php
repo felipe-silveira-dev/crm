@@ -76,3 +76,11 @@ test('make sure that we are using the cache the retrieve', function () {
     $user->hasPermissionTo(Can::BE_AN_ADMIN);
     expect(true)->toBeTrue();
 });
+
+test('only be an admin users can see the admin items in the menu', function () {
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->get(route('admin.dashboard'))
+        ->assertDontSee('Admin');
+});
