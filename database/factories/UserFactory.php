@@ -35,4 +35,11 @@ class UserFactory extends Factory
             $user->givePermissionTo($key);
         });
     }
+
+    public function admin(): static
+    {
+        return $this->afterCreating(function ($user) {
+            $user->givePermissionTo(Can::BE_AN_ADMIN);
+        });
+    }
 }

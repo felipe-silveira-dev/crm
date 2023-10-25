@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     #region Admin
     Route::prefix('/admin')->middleware('can:' . Can::BE_AN_ADMIN->value)->group(function () {
         Route::get('/', Dashboard::class)->name('admin.dashboard');
+        Route::get('/users', fn () => 'admin.users')->name('admin.users');
     });
     #endregion
 
