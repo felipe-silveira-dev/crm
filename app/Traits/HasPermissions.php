@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Traits;
 
+use App\Enums\Can;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
 trait HasPermissions
 {
-    public function givePermissionTo(string $key): void
+    public function givePermissionTo(Can|string $key): void
     {
-        $this->permissions()->firstOrCreate(['key' => $key]);
+        $pKey = $key instanceof Can ? $key->value : $key;
+
+        $this->permissions()->firstOrCreate(['key' => $pKey]);
 
         Cache::forget($this->getPermissionCacheKey());
         Cache::remember($this->getPermissionCacheKey(), now()->addMonths(3), function () {
@@ -17,12 +20,14 @@ trait HasPermissions
         });
     }
 
-    public function hasPermissionTo(string $key): bool
+    public function hasPermissionTo(Can|string $key): bool
     {
+        $pKey = $key instanceof Can ? $key->value : $key;
+
         /** @var Collection $permissions */
         $permissions = Cache::get($this->getPermissionCacheKey(), $this->permissions);
 
-        return $permissions->contains('key', $key);
+        return $permissions->contains('key', $pKey);
     }
 
     private function getPermissionCacheKey(): string
