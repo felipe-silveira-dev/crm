@@ -3,9 +3,9 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Enums\Can;
-use App\Models\User;
+use App\Models\{Permission, User};
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
@@ -17,9 +17,12 @@ class Index extends Component
 
     public array $search_permissions = [];
 
+    public Collection $permissionsToSearch;
+
     public function mount(): void
     {
         $this->authorize(Can::BE_AN_ADMIN->value);
+        $this->searchPermissions();
     }
 
     public function render(): View
@@ -48,12 +51,10 @@ class Index extends Component
         )
         ->when(
             $this->search_permissions,
-            fn (Builder $q) => $q->whereRaw('
-                (select count(*)
-                from permission_user
-                where permission_id in (?)
-                and user_id = users.id) > 0
-            ', $this->search_permissions)
+            fn (Builder $q) => $q->whereHas(
+                'permissions',
+                fn (Builder $q) => $q->whereIn('id', $this->search_permissions)
+            )
         )
         ->paginate(10);
     }
@@ -68,5 +69,19 @@ class Index extends Component
             ['key' => 'permissions', 'label' => 'Permissions'],
             ['key' => 'actions', 'label' => 'Actions'],
         ];
+    }
+
+    public function searchPermissions(?string $value = null): void
+    {
+        $this->permissionsToSearch = Permission::query()
+                ->when(
+                    $value,
+                    fn (Builder $q) => $q->where(
+                        'key',
+                        '%' . $value . '%'
+                    )
+                )
+                ->orderBy('key')
+                ->get();
     }
 }
