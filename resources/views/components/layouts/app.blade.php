@@ -10,6 +10,7 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased">
+    <x-toast />
     <x-main full-width>
         <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3 text-white bg-sky-800">
 

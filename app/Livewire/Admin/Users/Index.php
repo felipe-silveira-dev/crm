@@ -115,5 +115,10 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function destroy(int $id): void
+    {
+        $this->dispatch('user::deletion', userId: $id)->to('admin.users.delete');
+    }
+
     #endregion methods
 }
