@@ -9,15 +9,23 @@ use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
-use Livewire\Component;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
+    use WithPagination;
+
     public ?string $search = null;
 
     public array $search_permissions = [];
 
     public bool $search_trash = false;
+
+    public string $sortDirection = 'asc';
+
+    public string $sortColumnBy = 'id';
+
+    public int $perPage = 10;
 
     public Collection $permissionsToSearch;
 
@@ -38,6 +46,7 @@ class Index extends Component
         $this->validate(['search_permissions' => 'exists:permissions,id']);
 
         return User::query()
+        ->with('permissions')
         ->when(
             $this->search,
             fn (Builder $q) => $q->where(
@@ -59,17 +68,18 @@ class Index extends Component
             )
         )
         ->when($this->search_trash, fn (Builder $q) => $q->onlyTrashed()) /** @phpstan-ignore-line */
-        ->paginate(10);
+        ->orderBy($this->sortColumnBy, $this->sortDirection)
+        ->paginate($this->perPage);
     }
 
     #[Computed]
     public function headers(): array
     {
         return [
-            ['key' => 'id', 'label' => '#'],
-            ['key' => 'name', 'label' => 'Name'],
-            ['key' => 'email', 'label' => 'Email'],
-            ['key' => 'permissions', 'label' => 'Permissions'],
+            ['key' => 'id', 'label' => '#', 'sortColumnBy' => $this->sortColumnBy, 'sortDirection' => $this->sortDirection],
+            ['key' => 'name', 'label' => 'Name', 'sortColumnBy' => $this->sortColumnBy, 'sortDirection' => $this->sortDirection],
+            ['key' => 'email', 'label' => 'Email', 'sortColumnBy' => $this->sortColumnBy, 'sortDirection' => $this->sortDirection],
+            ['key' => 'permissions', 'label' => 'Permissions', 'sortColumnBy' => $this->sortColumnBy, 'sortDirection' => $this->sortDirection],
             ['key' => 'actions', 'label' => 'Actions'],
         ];
     }
@@ -86,5 +96,16 @@ class Index extends Component
                 )
                 ->orderBy('key')
                 ->get();
+    }
+
+    public function sortBy(string $column, string $direction): void
+    {
+        $this->sortColumnBy  = $column;
+        $this->sortDirection = $direction;
+    }
+
+    public function updatedPerPage($value): void
+    {
+        $this->resetPage();
     }
 }
