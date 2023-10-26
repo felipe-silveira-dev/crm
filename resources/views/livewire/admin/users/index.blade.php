@@ -20,7 +20,7 @@
         ]" label="Records Per Page" />
     </div>
 
-    <x-table :headers="$this->headers" :rows="$this->users">
+    <x-table :headers="$this->headers" :rows="$this->users" class="mb-4">
         @scope('header_id', $header)
             <x-table.th :$header name="id" />
         @endscope
@@ -53,5 +53,5 @@
         @endscope
     </x-table>
 
-    {{ $this->users->links(data: ['scrollTo' => false]) }}
+    {{ $this->users->links() }}
 </div>

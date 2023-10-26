@@ -15,6 +15,8 @@ class Index extends Component
 {
     use WithPagination;
 
+    #region properties
+
     public ?string $search = null;
 
     public array $search_permissions = [];
@@ -28,6 +30,10 @@ class Index extends Component
     public int $perPage = 10;
 
     public Collection $permissionsToSearch;
+
+    #endregion properties
+
+    #region methods
 
     public function mount(): void
     {
@@ -108,4 +114,6 @@ class Index extends Component
     {
         $this->resetPage();
     }
+
+    #endregion methods
 }
