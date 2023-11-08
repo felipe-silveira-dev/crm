@@ -14,8 +14,8 @@ it('it should be able to show all details of the user in the component', functio
 
     Livewire::test(Show::class)
         ->call('loadUser', $user->id)
-        ->assertSet('user.id', $user->id) // tip: sometimes the object has different values.
-        ->assertSee('modal', true)
+        ->assertSet('user.id', $user->id) // tip: sometimes the object has different values..
+        ->assertSet('modal', true)
         ->assertSee($user->name)
         ->assertSee($user->email)
         ->assertSee($user->created_at->format('d/m/Y H:i'))
