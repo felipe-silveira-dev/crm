@@ -8,8 +8,8 @@
         <br>
         {{ $this->user->updated_at->format('d/m/Y H:i') }}
         <br>
-        {{ $this->user->deleted_at->format('d/m/Y H:i') }}
+        {{ $this->user->deleted_at?->format('d/m/Y H:i') }}
         <br>
-        {{ $this->user->deletedBy->name }}
+        {{ $this->user->deletedBy?->name }}
     @endisset
 </div>
