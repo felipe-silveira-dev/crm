@@ -112,6 +112,11 @@ class Index extends Component
         $this->sortDirection = $direction;
     }
 
+    public function showUser(int $id): void
+    {
+        $this->dispatch('user::show', id: $id)->to('admin.users.show');
+    }
+
     public function updatedPerPage($value): void
     {
         $this->resetPage();

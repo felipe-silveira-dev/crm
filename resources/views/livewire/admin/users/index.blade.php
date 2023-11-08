@@ -41,22 +41,33 @@
         @endscope
 
         @scope('actions', $user)
-            @can(\App\Enums\Can::BE_AN_ADMIN->value)
-                @unless ($user->trashed())
-                    @unless ($user->is(auth()->user()))
-                        <x-button id="delete-btn-{{ $user->id }}" wire:key="delete-btn-{{ $user->id }}" icon="o-trash"
-                            wire:click="destroy('{{ $user->id }}')" spinner class="btn-sm" />
-                        @endif
-                    @else
-                        <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $user->id }})" spinner
-                            class="btn-sm btn-success btn-ghost" />
-                    @endunless
-                @endcan
+            <div class="flex items-center justify-center gap-2">
+                <x-button
+                    id="show-btn-{{ $user->id }}"
+                    wire:key="show-btn-{{ $user->id }}"
+                    icon="o-eye"
+                    wire:click="showUser({{ $user->id }})"
+                    spinner
+                    class="btn-sm"
+                />
+                @can(\App\Enums\Can::BE_AN_ADMIN->value)
+                    @unless ($user->trashed())
+                        @unless ($user->is(auth()->user()))
+                            <x-button id="delete-btn-{{ $user->id }}" wire:key="delete-btn-{{ $user->id }}" icon="o-trash"
+                                wire:click="destroy('{{ $user->id }}')" spinner class="btn-sm" />
+                            @endif
+                        @else
+                            <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $user->id }})" spinner
+                                class="btn-sm btn-success btn-ghost" />
+                        @endunless
+                    @endcan
+            </div>
             @endscope
         </x-table>
 
         {{ $this->users->links(data: ['scrollTo' => false]) }}
 
-        <livewire:admin.users.delete/>
-        <livewire:admin.users.restore/>
+        <livewire:admin.users.delete />
+        <livewire:admin.users.restore />
+        <livewire:admin.users.show />
     </div>
