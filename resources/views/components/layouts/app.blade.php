@@ -11,6 +11,11 @@
 
 <body class="min-h-screen font-sans antialiased">
     <x-toast />
+    @if(session()->has('impersonate'))
+        <span class="absolute top-0 right-0 z-50 p-2 mr-2 text-xs font-bold text-white bg-red-500 rounded-full">
+            Impersonating {{ auth()->user()->name }}
+        </span>
+    @endif
     <x-main full-width>
         <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3 text-white bg-sky-800">
 
