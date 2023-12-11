@@ -14,6 +14,10 @@
     @if(session()->has('impersonate'))
         <livewire:admin.users.stop-impersonate />
     @endif
+    @if(!app()->environment('production'))
+        <livewire:dev.login />
+    @endif
+
     <x-main full-width>
         <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3 text-white bg-sky-800">
 
