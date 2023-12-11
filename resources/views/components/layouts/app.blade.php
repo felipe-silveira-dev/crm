@@ -11,11 +11,11 @@
 
 <body class="min-h-screen font-sans antialiased">
     <x-toast />
-    @if(session()->has('impersonate'))
+    @if (session()->has('impersonate'))
         <livewire:admin.users.stop-impersonate />
     @endif
-    @if(!app()->environment('production'))
-        <livewire:dev.login />
+    @if (!app()->environment('production'))
+        <x-devbar />
     @endif
 
     <x-main full-width>
