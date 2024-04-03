@@ -55,5 +55,15 @@ class ArrayHelper
         }
         //DB::statement('ALTER TABLE table_name ENABLE KEYS;');
         // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $path = DB::getPdo()->quote($path);
+
+        DB::statement("
+            LOAD DATA LOCAL INFILE '{$path}'
+            INTO TABLE table_name
+            FIELDS TERMINATED BY ','
+            LINES TERMINATED BY '\n'
+            (column1, column2, column3)
+        ");
     }
 }
