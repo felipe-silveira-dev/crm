@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Dev;
 
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Process;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -32,7 +31,7 @@ class BranchEnv extends Component
     #[Computed()]
     public function branch(): string
     {
-       $process = Process::run('git branch --show-current');
+        $process = Process::run('git branch --show-current');
 
         return trim($process->output());
     }
