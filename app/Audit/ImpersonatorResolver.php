@@ -2,8 +2,7 @@
 
 namespace App\Audit;
 
-use OwenIt\Auditing\Contracts\Auditable;
-use OwenIt\Auditing\Contracts\Resolver;
+use OwenIt\Auditing\Contracts\{Auditable, Resolver};
 
 class ImpersonatorResolver implements Resolver
 {

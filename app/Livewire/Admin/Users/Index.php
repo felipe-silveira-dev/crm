@@ -58,7 +58,7 @@ class Index extends Component
         ->when(
             $this->search,
             fn (Builder $q) => $q->where(
-                DB::raw('lower(name)'), /** @phpstan-ignore-line */
+                DB::raw('lower(name)'),
                 'like',
                 '%' . strtolower($this->search) . '%'
             )

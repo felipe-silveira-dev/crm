@@ -20,6 +20,7 @@ class StopImpersonate extends Component
     public function stop()
     {
         session()->forget('impersonate');
+
         return redirect()->route('admin.dashboard');
     }
 }
