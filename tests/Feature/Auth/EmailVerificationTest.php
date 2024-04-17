@@ -71,4 +71,23 @@ describe('validation page', function () {
             ->call('handle')
             ->assertHasErrors(['code' => 'Invalid code']);
     });
+
+    it('should to send a new code to the user', function () {
+        $user    = User::factory()->withValidationCode()->create();
+        $oldCode = $user->validation_code;
+
+        actingAs($user);
+
+        Livewire::test(EmailValidation::class)
+            ->call('sendNewCode')
+            ->assertHasNoErrors();
+
+        $user->refresh();
+
+        expect($user->validation_code)->not->toBe($oldCode);
+        Notification::assertSentTo(
+            $user,
+            ValidationCodeNotification::class
+        );
+    });
 });
