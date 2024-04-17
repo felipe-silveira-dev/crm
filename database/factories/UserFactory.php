@@ -56,7 +56,8 @@ class UserFactory extends Factory
     public function withValidationCode(): static
     {
         return $this->state(fn (array $attributes) => [
-            'validation_code' => random_int(100000, 999999),
+            'email_verified_at' => null,
+            'validation_code'   => random_int(100000, 999999),
         ]);
     }
 }
