@@ -52,4 +52,12 @@ class UserFactory extends Factory
             'deleted_by' => User::factory()->admin()->create()->id,
         ]);
     }
+
+    public function withValidationCode(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+            'validation_code'   => random_int(100000, 999999),
+        ]);
+    }
 }
