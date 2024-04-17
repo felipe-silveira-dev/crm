@@ -3,7 +3,6 @@
 use App\Livewire\Auth\Register;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\{Event, Notification};
 use Livewire\Livewire;
@@ -25,7 +24,7 @@ it('should be able to register', function () {
         ->set('password', 'password')
         ->call('submit')
         ->assertHasNoErrors()
-        ->assertRedirect(RouteServiceProvider::HOME);
+        ->assertRedirect(route('auth.email-validation'));
 
     assertDatabaseHas('users', [
         'name'  => 'John Doe',
