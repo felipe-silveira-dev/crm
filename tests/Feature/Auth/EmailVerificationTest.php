@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\{Event, Notification};
 use Livewire\Livewire;
 
-use function Pest\Laravel\actingAs;
+use function Pest\Laravel\{actingAs, get};
 use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function () {
@@ -110,4 +110,15 @@ describe('validation page', function () {
             WelcomeNotification::class
         );
     });
+});
+
+describe('middleware', function () {
+    it('should redirect to the validation page if the user is not verified', function () {
+        $user = User::factory()->withValidationCode()->create();
+        actingAs($user);
+
+        get(route('dashboard'))
+            ->assertRedirect(route('auth.email-validation'));
+    });
+
 });
