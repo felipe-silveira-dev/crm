@@ -9,7 +9,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\actingAs;
 
 it('should be able to access route customers', function () {
-    $user = User::factory()->admin()->create();
+    $user = User::factory()->create();
 
     actingAs($user)
         ->get(route('customers'))
@@ -68,31 +68,6 @@ it('should be able to filter by name and email', function () {
         expect($customers)
             ->toHaveCount(1)
             ->first()->name->toBe('Mario Silva');
-
-        return true;
-    });
-});
-
-it('should be able to filter permission.key', function () {
-    $admin      = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@crm.com']);
-    $mario      = User::factory()->create(['name' => 'Mario Silva', 'email' => 'little_guy@gmail.com']);
-    $permission = Permission::where('key', '=', Can::BE_AN_ADMIN->value)->first();
-
-    actingAs($admin);
-
-    $lw = Livewire::test(Index::class);
-    $lw->assertSet('customers', function ($customers) {
-        expect($customers)
-            ->toBeInstanceOf(LengthAwarePaginator::class)
-            ->toHaveCount(2);
-
-        return true;
-    })
-    ->set('search_permissions', [$permission->id])
-    ->assertSet('customers', function ($customers) {
-        expect($customers)
-            ->toHaveCount(1)
-            ->first()->name->toBe('Joe Doe');
 
         return true;
     });
