@@ -7,8 +7,6 @@ use App\Models\Customer;
 use App\Traits\Livewire\HasTable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\{Component, WithPagination};
 
@@ -29,11 +27,7 @@ class Index extends Component
     public function customers(): LengthAwarePaginator
     {
         return Customer::query()
-        ->when(
-            $this->search,
-            fn (Builder $q) => $q->where(DB::raw('lower(name)'), 'like', '%' . strtolower($this->search) . '%')
-            ->orWhere('email', 'like', '%' . strtolower($this->search) . '%')
-        )
+        ->search($this->search, ['name', 'email'])
         ->orderBy($this->sortColumnBy, $this->sortDirection)
         ->paginate($this->perPage);
     }
