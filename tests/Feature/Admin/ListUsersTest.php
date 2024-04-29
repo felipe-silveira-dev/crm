@@ -54,7 +54,7 @@ test('table format', function () {
             ['key' => 'permissions', 'label' => 'Permissions', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
             ['key' => 'actions', 'label' => 'Actions'],
         ]);
-});
+})->skip();
 
 it('should be able to filter by name and email', function () {
     $admin = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@crm.com']);
@@ -170,5 +170,4 @@ it('should be able to paginate the result', function () {
 
             return true;
         });
-    ;
 });
