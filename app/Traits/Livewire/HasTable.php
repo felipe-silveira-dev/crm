@@ -42,10 +42,7 @@ trait HasTable
     public function items(): LengthAwarePaginator
     {
         // @phpstan-ignore-next-line
-        $query = $this->query()->search($this->search, $this->searchColumns())->orderBy($this->sortColumnBy, $this->sortDirection)->paginate($this->perPage);
-        ;
-
-        return $query;
+        return $this->query()->search($this->search, $this->searchColumns())->orderBy($this->sortColumnBy, $this->sortDirection)->paginate($this->perPage);
     }
 
     public function sortBy(string $column, string $direction): void
