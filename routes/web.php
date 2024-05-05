@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     #region Customer
     Route::get('/customers', Customers\Index::class)->name('customers');
+    Route::get('/customers/{customer}', fn () => 'Vai Corinthians!')->name('customers.show');
     #endregion
 
     #region Admin
