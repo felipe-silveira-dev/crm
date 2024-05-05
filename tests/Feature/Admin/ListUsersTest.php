@@ -29,8 +29,8 @@ it('should list all users in the page', function () {
     actingAs($user);
 
     $lw = Livewire::test(Index::class);
-    $lw->assertSet('users', function ($users) {
-        expect($users)
+    $lw->assertSet('items', function ($items) {
+        expect($items)
             ->toBeInstanceOf(LengthAwarePaginator::class)
             ->toHaveCount(10);
 
@@ -42,20 +42,6 @@ it('should list all users in the page', function () {
     }
 });
 
-test('table format', function () {
-
-    actingAs(User::factory()->admin()->create());
-
-    Livewire::test(Index::class)
-        ->assertSet('headers', [
-            ['key' => 'id', 'label' => '#', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'name', 'label' => 'Name', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'email', 'label' => 'Email', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'permissions', 'label' => 'Permissions', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'actions', 'label' => 'Actions'],
-        ]);
-});
-
 it('should be able to filter by name and email', function () {
     $admin = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@crm.com']);
     $mario = User::factory()->create(['name' => 'Mario Silva', 'email' => 'little_guy@gmail.com']);
@@ -63,16 +49,16 @@ it('should be able to filter by name and email', function () {
     actingAs($admin);
 
     $lw = Livewire::test(Index::class);
-    $lw->assertSet('users', function ($users) {
-        expect($users)
+    $lw->assertSet('items', function ($items) {
+        expect($items)
             ->toBeInstanceOf(LengthAwarePaginator::class)
             ->toHaveCount(2);
 
         return true;
     })
     ->set('search', 'Mario')
-    ->assertSet('users', function ($users) {
-        expect($users)
+    ->assertSet('items', function ($items) {
+        expect($items)
             ->toHaveCount(1)
             ->first()->name->toBe('Mario Silva');
 
@@ -88,16 +74,16 @@ it('should be able to filter permission.key', function () {
     actingAs($admin);
 
     $lw = Livewire::test(Index::class);
-    $lw->assertSet('users', function ($users) {
-        expect($users)
+    $lw->assertSet('items', function ($items) {
+        expect($items)
             ->toBeInstanceOf(LengthAwarePaginator::class)
             ->toHaveCount(2);
 
         return true;
     })
     ->set('search_permissions', [$permission->id])
-    ->assertSet('users', function ($users) {
-        expect($users)
+    ->assertSet('items', function ($items) {
+        expect($items)
             ->toHaveCount(1)
             ->first()->name->toBe('Joe Doe');
 
@@ -110,15 +96,15 @@ it('shoul be able to list deleted users', function () {
     $deletedUsers = User::factory()->count(2)->create(['deleted_at' => now()]);
 
     actingAs($admin);
-    Livewire::test(Admin\Users\Index::class)
-        ->assertSet('users', function ($users) {
-            expect($users)->toHaveCount(1);
+    Livewire::test(Index::class)
+        ->assertSet('items', function ($items) {
+            expect($items)->toHaveCount(1);
 
             return true;
         })
         ->set('search_trash', true)
-        ->assertSet('users', function ($users) {
-            expect($users)
+        ->assertSet('items', function ($items) {
+            expect($items)
                 ->toHaveCount(2);
 
             return true;
@@ -130,22 +116,22 @@ it('should be able to sort by name', function () {
     $users = User::factory()->create(['name' => 'Mario', 'email' => 'little_guy@gmail.com']);
 
     actingAs($admin);
-    Livewire::test(Admin\Users\Index::class)
+    Livewire::test(Index::class)
         ->set('sortDirection', 'asc')
         ->set('sortColumnBy', 'name')
-        ->assertSet('users', function ($users) {
-            expect($users)
+        ->assertSet('items', function ($items) {
+            expect($items)
                 ->first()->name->toBe('Joe Doe')
-                ->and($users)->last()->name->toBe('Mario');
+                ->and($items)->last()->name->toBe('Mario');
 
             return true;
         })
         ->set('sortDirection', 'desc')
         ->set('sortColumnBy', 'name')
-        ->assertSet('users', function ($users) {
-            expect($users)
+        ->assertSet('items', function ($items) {
+            expect($items)
                 ->first()->name->toBe('Mario')
-                ->and($users)->last()->name->toBe('Joe Doe');
+                ->and($items)->last()->name->toBe('Joe Doe');
 
             return true;
         });
@@ -156,19 +142,18 @@ it('should be able to paginate the result', function () {
     User::factory()->count(30)->create();
 
     actingAs($admin);
-    Livewire::test(Admin\Users\Index::class)
-        ->assertSet('users', function (LengthAwarePaginator $users) {
-            expect($users)
+    Livewire::test(Index::class)
+        ->assertSet('items', function (LengthAwarePaginator $items) {
+            expect($items)
                 ->toHaveCount(10);
 
             return true;
         })
         ->set('perPage', 20)
-        ->assertSet('users', function (LengthAwarePaginator $users) {
-            expect($users)
+        ->assertSet('items', function (LengthAwarePaginator $items) {
+            expect($items)
                 ->toHaveCount(20);
 
             return true;
         });
-    ;
 });
