@@ -5,9 +5,9 @@ namespace App\Livewire\Customers;
 use App\Helpers\Table\Header;
 use App\Models\Customer;
 use App\Traits\Livewire\HasTable;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Computed;
 use Livewire\{Component, WithPagination};
 
 /**
@@ -23,13 +23,14 @@ class Index extends Component
         return view('livewire.customers.index');
     }
 
-    #[Computed]
-    public function customers(): LengthAwarePaginator
+    public function query(): Builder
     {
-        return Customer::query()
-        ->search($this->search, ['name', 'email'])
-        ->orderBy($this->sortColumnBy, $this->sortDirection)
-        ->paginate($this->perPage);
+        return Customer::query();
+    }
+
+    public function searchColumns(): array
+    {
+        return ['name', 'email'];
     }
 
     public function tableHeaders(): array

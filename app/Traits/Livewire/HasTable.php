@@ -3,6 +3,8 @@
 namespace App\Traits\Livewire;
 
 use App\Helpers\Table\Header;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 
 trait HasTable
@@ -18,6 +20,8 @@ trait HasTable
     // Uma função abstrata obriga a classe que a implementa a definir a função
     /** @return Header[] */
     abstract public function tableHeaders(): array;
+    abstract public function query(): Builder;
+    abstract public function searchColumns(): array;
 
     #[Computed]
     public function headers(): array
@@ -32,5 +36,24 @@ trait HasTable
                 ];
             })
             ->toArray();
+    }
+
+    #[Computed]
+    public function items(): LengthAwarePaginator
+    {
+        $query = $this->query();
+
+        /** @phpstan-ignore-next-line */
+        $query->search($this->search, $this->searchColumns());
+
+        return $query()
+        ->orderBy($this->sortColumnBy, $this->sortDirection)
+        ->paginate($this->perPage);
+    }
+
+    public function sortBy(string $column, string $direction): void
+    {
+        $this->sortColumnBy  = $column;
+        $this->sortDirection = $direction;
     }
 }
