@@ -24,7 +24,7 @@ it('should be able to restore a customer', function () {
 });
 
 test('when confirming we should load the customer and set modal to true', function () {
-    $customer = Customer::factory()->create();
+    $customer = Customer::factory()->deleted()->create();
     $user     = User::factory()->create();
 
     actingAs($user);
