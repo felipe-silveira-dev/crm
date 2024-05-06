@@ -31,4 +31,9 @@ class CustomerFactory extends Factory
             'position' => fake()->jobTitle,
         ];
     }
+
+    public function deleted(): Factory
+    {
+        return $this->state(fn (array $attributes) => ['deleted_at' => now()]);
+    }
 }

@@ -33,3 +33,24 @@ test('when confirming we should load the customer and set modal to true', functi
         ->assertSet('customer.id', $customer->id)
         ->assertSet('modal', true);
 });
+
+it('should list archived customers', function () {
+    $customer = Customer::factory()->deleted()->create();
+    $user     = User::factory()->create();
+
+    actingAs($user);
+
+    Livewire::test(Customers\Index::class)
+        ->set('searchTrash', true)
+        ->assertSee($customer->name);
+});
+
+test('not show archived customers by default', function () {
+    $customer = Customer::factory()->deleted()->create();
+    $user     = User::factory()->create();
+
+    actingAs($user);
+
+    Livewire::test(Customers\Index::class)
+        ->assertDontSee($customer->name);
+});

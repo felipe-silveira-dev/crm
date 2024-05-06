@@ -19,6 +19,8 @@ class Index extends Component
     use WithPagination;
     use HasTable;
 
+    public bool $searchTrash = false;
+
     #[On('customer::reload')]
     public function render(): View
     {
@@ -27,7 +29,7 @@ class Index extends Component
 
     public function query(): Builder
     {
-        return Customer::query();
+        return Customer::query()->when($this->searchTrash, fn (Builder $q) => $q->onlyTrashed());
     }
 
     public function searchColumns(): array

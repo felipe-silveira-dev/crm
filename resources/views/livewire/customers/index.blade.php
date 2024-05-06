@@ -2,12 +2,15 @@
     <x-header title="Customers" separator progress-indicator />
 
     <div class="flex items-end justify-between mb-4">
-        <div class="flex w-full space-x-4">
+        <div class="flex items-end w-full space-x-4">
+            {{-- Search --}}
             <div class="w-1/3">
                 <x-input label="Search by name or email" icon="o-magnifying-glass" wire:model.live="search"
                     placeholder="Search customers..." />
             </div>
-            <x-checkbox label="Show Deleted customers" wire:model.live="search_trash" right />
+            {{-- Archived Customers --}}
+            <x-checkbox label="Show archived" wire:model.live="searchTrash" right />
+            {{-- Per Page --}}
             <x-select wire:model.live="perPage" :options="[
                 ['id' => 5, 'name' => 5],
                 ['id' => 15, 'name' => 15],
