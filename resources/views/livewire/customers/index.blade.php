@@ -12,7 +12,7 @@
             <x-checkbox label="Show archived" wire:model.live="searchTrash" right />
             {{-- Per Page --}}
             <x-select wire:model.live="perPage" :options="[
-                ['id' => 5, 'name' => 5],
+                ['id' => 10, 'name' => 10],
                 ['id' => 15, 'name' => 15],
                 ['id' => 25, 'name' => 25],
                 ['id' => 50, 'name' => 50],
@@ -44,8 +44,8 @@
                     <x-button id="archive-btn-{{ $customer->id }}" wire:key="archive-btn-{{ $customer->id }}" class="btn-sm"
                         icon="o-trash" @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" spinner />
                 @else
-                    <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} }) spinner
-                        class="btn-sm btn-success btn-ghost" />
+                        <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" spinner
+                            class="btn-sm btn-success btn-ghost" />
                 @endunless
             </div>
         @endscope
