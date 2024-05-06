@@ -9,6 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('type', 20)->default('customer');
             $table->string('name', 200);
             $table->string('email', 200)->unique()->index();
             $table->string('phone', 20)->unique()->nullable();
@@ -26,6 +27,7 @@ return new class () extends Migration {
             $table->string('company', 200)->nullable();
             $table->string('position', 200)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
