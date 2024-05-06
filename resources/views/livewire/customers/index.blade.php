@@ -44,7 +44,7 @@
                     <x-button id="archive-btn-{{ $customer->id }}" wire:key="archive-btn-{{ $customer->id }}" class="btn-sm"
                         icon="o-trash" @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" spinner />
                 @else
-                    <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $customer->id }})" spinner
+                    <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} }) spinner
                         class="btn-sm btn-success btn-ghost" />
                 @endunless
             </div>
@@ -55,4 +55,5 @@
 
     <livewire:customers.create />
     <livewire:customers.archive />
+    <livewire:customers.restore />
 </div>
