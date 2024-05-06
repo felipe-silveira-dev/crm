@@ -21,3 +21,15 @@ it('should be able to archive a customer', function () {
         'id' => $customer->id,
     ]);
 });
+
+test('when confirming we should load the customer and set modal to true', function () {
+    $customer = Customer::factory()->create();
+    $user     = User::factory()->create();
+
+    actingAs($user);
+
+    Livewire::test(Customers\Archive::class)
+        ->call('confirmAction', $customer->id)
+        ->assertSet('customer.id', $customer->id)
+        ->assertSet('modal', true);
+});

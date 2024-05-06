@@ -33,10 +33,30 @@
         @scope('header_email', $header)
             <x-table.th :$header name="email" />
         @endscope
+
+        @scope('actions', $customer)
+            <div class="flex items-center justify-center gap-2">
+                <x-button
+                    id="archive-btn-{{ $customer->id }}"
+                    wire:key="archive-btn-{{ $customer->id }}"
+                    class="btn-sm"
+                    icon="o-trash"
+                    @click="$dispatch('customer::archive', { id: {{ $customer->id }} })"
+                    spinner
+                />
+
+                <x-button
+                    icon="o-arrow-path-rounded-square"
+                    wire:click="restore({{ $customer->id }})"
+                    spinner
+                    class="btn-sm btn-success btn-ghost"
+                />
+            </div>
+        @endscope
     </x-table>
 
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
     <livewire:customers.create />
-
+    <livewire:customers.archive />
 </div>

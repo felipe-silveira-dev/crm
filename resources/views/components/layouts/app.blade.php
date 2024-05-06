@@ -14,8 +14,9 @@
     @if (session()->has('impersonate'))
         <livewire:admin.users.stop-impersonate />
     @endif
+
     @if (!app()->environment('production'))
-        <x-devbar />
+        <x-devbar  />
     @endif
 
     <x-main full-width>
