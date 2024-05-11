@@ -52,3 +52,8 @@ it('should be able to restore a customer from the archive', function () {
         'deleted_at' => null,
     ]);
 });
+
+test('make sure restore method is wired', function () {
+    Livewire::test(Customers\Restore::class)
+        ->assertMethodWired('restore');
+});
