@@ -12,12 +12,12 @@ beforeEach(function () {
     $this->customer = Customer::factory()->create();
 });
 
-it('should beable to update a customer', function () {
+it('should be able to update a customer', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', 'John Doe')
-        ->set('customer.email', 'john@doe.com')
-        ->set('customer.phone', '1234567890')
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', 'john@doe.com')
+        ->set('form.phone', '1234567890')
         ->call('save')
         ->assertHasNoErrors();
 
@@ -32,12 +32,12 @@ it('should beable to update a customer', function () {
 
 it('should require a name', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', '')
-        ->set('customer.email', 'john@doe.com')
-        ->set('customer.phone', '1234567890')
+        ->call('load', $this->customer->id)
+        ->set('form.name', '')
+        ->set('form.email', 'john@doe.com')
+        ->set('form.phone', '1234567890')
         ->call('save')
-        ->assertHasErrors(['customer.name' => 'required']);
+        ->assertHasErrors(['form.name' => 'required']);
 
     assertDatabaseHas('customers', [
         'id'    => $this->customer->id,
@@ -50,74 +50,74 @@ it('should require a name', function () {
 
 it('should require an email or phone', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', 'John Doe')
-        ->set('customer.email', '')
-        ->set('customer.phone', '')
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', '')
+        ->set('form.phone', '')
         ->call('save')
         ->assertHasErrors();
 });
 
 it('should require a valid email', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', 'John Doe')
-        ->set('customer.email', 'invalid-email')
-        ->set('customer.phone', '')
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', 'invalid-email')
+        ->set('form.phone', '')
         ->call('save')
-        ->assertHasErrors(['customer.email' => 'email']);
+        ->assertHasErrors(['form.email' => 'email']);
 });
 
 it('should require a unique email', function () {
     Livewire::test(Customers\Create::class)
-    ->set('name', 'John Doe')
-    ->set('email', 'john@doe.com')
-    ->set('phone', '1234567890')
+    ->set('form.name', 'John Doe')
+    ->set('form.email', 'john@doe.com')
+    ->set('form.phone', '1234567890')
     ->call('save')
     ->assertHasNoErrors();
 
     Livewire::test(Customers\Update::class)
-    ->set('customer', $this->customer)
-    ->set('customer.name', 'John Doe')
-    ->set('customer.email', 'john@doe.com')
-    ->set('customer.phone', '1234567870')
+    ->call('load', $this->customer->id)
+    ->set('form.name', 'John Doe')
+    ->set('form.email', 'john@doe.com')
+    ->set('form.phone', '1234567870')
     ->call('save')
-    ->assertHasErrors(['customer.email' => 'unique']);
+    ->assertHasErrors(['form.email' => 'unique']);
 });
 
 it('should require a unique phone', function () {
     Livewire::test(Customers\Create::class)
-    ->set('name', 'John Doe')
-    ->set('email', 'john@doe.com')
-    ->set('phone', '1234567890')
+    ->set('form.name', 'John Doe')
+    ->set('form.email', 'john@doe.com')
+    ->set('form.phone', '1234567890')
     ->call('save')
     ->assertHasNoErrors();
 
     Livewire::test(Customers\Update::class)
-    ->set('customer', $this->customer)
-    ->set('customer.name', 'Any Doe')
-    ->set('customer.email', 'any@doe.com')
-    ->set('customer.phone', '1234567890')
+    ->call('load', $this->customer->id)
+    ->set('form.name', 'Any Doe')
+    ->set('form.email', 'any@doe.com')
+    ->set('form.phone', '1234567890')
     ->call('save')
-    ->assertHasErrors(['customer.phone' => 'unique']);
+    ->assertHasErrors(['form.phone' => 'unique']);
 });
 
 it('should be able to update a customer without a phone', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', 'John Doe')
-        ->set('customer.email', 'john@doe.com')
-        ->set('customer.phone', '')
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', 'john@doe.com')
+        ->set('form.phone', '')
         ->call('save')
         ->assertHasNoErrors();
 });
 
 it('should be able to update a customer without an email', function () {
     Livewire::test(Customers\Update::class)
-        ->set('customer', $this->customer)
-        ->set('customer.name', 'John Doe')
-        ->set('customer.email', '')
-        ->set('customer.phone', '1234567890')
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', '')
+        ->set('form.phone', '1234567890')
         ->call('save')
         ->assertHasNoErrors();
 });
