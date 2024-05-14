@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="dracula" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -20,13 +20,13 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3 text-white bg-sky-800">
+        <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3">
 
             <!-- Hidden when collapsed -->
-            <div class="ml-5 text-4xl font-black text-yellow-500 hidden-when-collapsed">mary</div>
+            <div class="ml-5 text-4xl font-black hidden-when-collapsed">CRM-DEV</div>
 
             <!-- Display when collapsed -->
-            <div class="ml-5 text-4xl font-black text-orange-500 display-when-collapsed">m</div>
+            <div class="ml-5 text-4xl font-black display-when-collapsed">CRM</div>
 
             <!-- Custom `active menu item background color` -->
             <x-menu activate-by-route active-bg-color="bg-base-300/10">

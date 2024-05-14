@@ -110,6 +110,15 @@ it('should be able to update a customer without a phone', function () {
         ->set('form.phone', '')
         ->call('save')
         ->assertHasNoErrors();
+
+    Livewire::test(Customers\Update::class)
+    ->call('load', $this->customer->id)
+    ->set('form.name', 'John Doe Updated')
+    ->set('form.email', $this->customer->email)
+    ->set('form.phone', '')
+    ->call('save')
+    ->assertHasNoErrors();
+
 });
 
 it('should be able to update a customer without an email', function () {
@@ -118,6 +127,14 @@ it('should be able to update a customer without an email', function () {
         ->set('form.name', 'John Doe')
         ->set('form.email', '')
         ->set('form.phone', '1234567890')
+        ->call('save')
+        ->assertHasNoErrors();
+
+    Livewire::test(Customers\Update::class)
+        ->call('load', $this->customer->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', '')
+        ->set('form.phone', $this->customer->phone)
         ->call('save')
         ->assertHasNoErrors();
 });
