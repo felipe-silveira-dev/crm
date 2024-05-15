@@ -12,6 +12,7 @@ class CustomerFactory extends Factory
             'name'  => fake()->name,
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber,
+            'type'  => 'customer',
 
             'linkedin'  => 'https://linkedin.com/in/' . fake()->userName,
             'facebook'  => 'https://facebook.com/' . fake()->userName,
@@ -29,6 +30,7 @@ class CustomerFactory extends Factory
 
             'company'  => fake()->company,
             'position' => fake()->jobTitle,
+
         ];
     }
 
