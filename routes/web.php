@@ -5,7 +5,7 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Users\Index;
 use App\Livewire\Auth\Password\{Recovery, Reset};
 use App\Livewire\Auth\{EmailValidation, Login, Register};
-use App\Livewire\{Customers, Welcome};
+use App\Livewire\{Customers, Opportunities, Welcome};
 use Illuminate\Support\Facades\Route;
 
 #region Loginflow
@@ -21,9 +21,13 @@ Route::get('/password/reset', Reset::class)->name('password.reset');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', Welcome::class)->name('dashboard');
 
-    #region Customer
+    #region Customers
     Route::get('/customers', Customers\Index::class)->name('customers');
     Route::get('/customers/{customer}', fn () => 'Vai Corinthians!')->name('customers.show');
+    #endregion
+
+    #region Opportunities
+    Route::get('/opportunities', Opportunities\Index::class)->name('opportunities');
     #endregion
 
     #region Admin

@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Livewire\Customers;
+namespace App\Livewire\Opportunities;
 
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\{On};
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Create extends Component
 {
-    /** @var \App\Livewire\Customers\Form $form */
+    /** @var \App\Livewire\Opportunities\Form $form */
     public Form $form;
 
     public bool $modal = false;
 
     public function render(): View
     {
-        return view('livewire.customers.create');
+        return view('livewire.opportunities.create');
     }
 
-    #[On('customer::create')]
+    #[On('opportunity::create')]
     public function open(): void
     {
         $this->form->resetErrorBag();
@@ -30,6 +30,6 @@ class Create extends Component
         $this->form->create();
 
         $this->modal = false;
-        $this->dispatch('customer::reload')->to('customers.index');
+        $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
 }
