@@ -30,7 +30,7 @@ class Index extends Component
 
     public function searchColumns(): array
     {
-        return ['title', 'status', 'amount'];
+        return ['title', 'status'];
     }
 
     public function tableHeaders(): array

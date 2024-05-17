@@ -26,7 +26,7 @@
             <div class="ml-5 text-4xl font-black hidden-when-collapsed">CRM-DEV</div>
 
             <!-- Display when collapsed -->
-            <div class="ml-5 text-4xl font-black display-when-collapsed">CRM</div>
+            <div class="ml-5 text-4xl font-black display-when-collapsed">C</div>
 
             <!-- Custom `active menu item background color` -->
             <x-menu activate-by-route active-bg-color="bg-base-300/10">
@@ -50,6 +50,7 @@
 
                 <x-menu-item title="Home" icon="o-home" :link="route('dashboard')" />
                 <x-menu-item title="Customers" icon="o-building-storefront" :link="route('customers')" />
+                <x-menu-item title="Opportunities" icon="o-currency-dollar" :link="route('opportunities')" />
 
                 @can(\App\Enums\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
@@ -57,7 +58,7 @@
                         <x-menu-item title="Users" icon="o-users" link="{{ route('admin.users') }}" />
                     </x-menu-sub>
                 @endcan
-            </x-menu>
+            </x-menu-item>
         </x-slot:sidebar>
 
         <!-- The `$slot` goes here -->
