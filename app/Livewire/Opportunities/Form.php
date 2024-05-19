@@ -25,7 +25,7 @@ class Form extends BaseForm
 
         $this->title  = $opportunity->title;
         $this->status = $opportunity->status;
-        $this->amount = (string) $opportunity->amount;
+        $this->amount = (string) ($opportunity->amount / 100);
     }
 
     public function update(): void
@@ -34,7 +34,7 @@ class Form extends BaseForm
 
         $this->opportunity->title  = $this->title;
         $this->opportunity->status = $this->status;
-        $this->opportunity->amount = $this->amount;
+        $this->opportunity->amount = $this->getAmountAsInt();
 
         $this->opportunity->save();
     }
@@ -46,9 +46,20 @@ class Form extends BaseForm
         Opportunity::create([
             'title'  => $this->title,
             'status' => $this->status,
-            'amount' => $this->amount,
+            'amount' => $this->getAmountAsInt(),
         ]);
 
         $this->reset();
+    }
+
+    private function getAmountAsInt(): int
+    {
+        $amount = $this->amount;
+
+        if($amount === null) {
+            $amount = 0;
+        }
+
+        return (int) ($amount * 100);
     }
 }

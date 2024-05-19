@@ -7,6 +7,7 @@
     <title>{{ $title ?? config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
 </head>
 
 <body class="min-h-screen font-sans antialiased">
@@ -29,6 +30,7 @@
             <div class="ml-5 text-4xl font-black display-when-collapsed">C</div>
 
             <!-- Custom `active menu item background color` -->
+            {{-- Side bar items! --}}
             <x-menu activate-by-route active-bg-color="bg-base-300/10">
 
                 <!-- User -->

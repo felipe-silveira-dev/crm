@@ -37,6 +37,10 @@
             <x-table.th :$header name="email" />
         @endscope
 
+        @scope('header_phone', $header)
+            <x-table.th :$header name="phone" />
+        @endscope
+
         @scope('actions', $customer)
             <div class="flex items-center justify-center gap-2">
                 {{-- update --}}

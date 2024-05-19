@@ -17,7 +17,7 @@ it('should be able to update a opportunity', function () {
         ->call('load', $this->opportunity->id)
         ->set('form.title', 'John Doe')
         ->set('form.status', 'won')
-        ->set('form.amount', '1200')
+        ->set('form.amount', '120.00')
         ->call('save')
         ->assertHasNoErrors();
 
@@ -25,7 +25,7 @@ it('should be able to update a opportunity', function () {
         'id'     => $this->opportunity->id,
         'title'  => 'John Doe',
         'status' => 'won',
-        'amount' => '1200',
+        'amount' => '12000',
     ]);
 });
 

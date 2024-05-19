@@ -15,14 +15,14 @@ it('should create a opportunity', function () {
     Livewire::test(Opportunities\Create::class)
         ->set('form.title', 'John Doe')
         ->set('form.status', 'open')
-        ->set('form.amount', '1250')
+        ->set('form.amount', '125.00')
         ->call('save')
         ->assertHasNoErrors();
 
     assertDatabaseHas('opportunities', [
         'title'  => 'John Doe',
         'status' => 'open',
-        'amount' => 1250,
+        'amount' => '12500',
     ]);
 });
 
@@ -30,7 +30,7 @@ it('should require a title', function () {
     Livewire::test(Opportunities\Create::class)
         ->set('form.title', '')
         ->set('form.status', 'open')
-        ->set('form.amount', '1250')
+        ->set('form.amount', '150.00')
         ->call('save')
         ->assertHasErrors(['form.title' => 'required']);
 

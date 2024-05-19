@@ -34,7 +34,7 @@ class Index extends Component
 
     public function searchColumns(): array
     {
-        return ['name', 'email'];
+        return ['name', 'email', 'phone'];
     }
 
     public function tableHeaders(): array
@@ -43,6 +43,7 @@ class Index extends Component
             Header::make('id', '#'),
             Header::make('name', 'Name'),
             Header::make('email', 'Email'),
+            Header::make('phone', 'Phone'),
         ];
     }
 }

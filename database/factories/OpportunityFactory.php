@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Traits\Factory\HasDeleted;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OpportunityFactory extends Factory
 {
+    use HasDeleted;
+
     public function definition(): array
     {
         return [
@@ -13,10 +16,5 @@ class OpportunityFactory extends Factory
             'status' => fake()->randomElement(['open', 'won', 'lost']),
             'amount' => fake()->numberBetween(100, 10000),
         ];
-    }
-
-    public function deleted(): Factory
-    {
-        return $this->state(fn (array $attributes) => ['deleted_at' => now()]);
     }
 }

@@ -25,22 +25,45 @@
     </div>
 
     <x-table :headers="$this->headers" :rows="$this->items" class="mb-4">
+        {{-- ID --}}
         @scope('header_id', $header)
             <x-table.th :$header name="id" />
         @endscope
 
+        {{-- Title --}}
         @scope('header_title', $header)
             <x-table.th :$header name="title" />
         @endscope
 
+        {{-- Status --}}
         @scope('header_status', $header)
             <x-table.th :$header name="status" />
         @endscope
 
+        @scope('cell_status', $opportunity)
+            <x-badge
+                :value="$opportunity->status"
+                @class([
+                    'badge-outline text-black badge-sm',
+                    'badge-info' => $opportunity->status === 'open',
+                    'badge-success' => $opportunity->status === 'won',
+                    'badge-error' => $opportunity->status === 'lost',
+                ])
+            />
+        @endscope
+        {{-- End Status --}}
+
+        {{-- Amount --}}
         @scope('header_amount', $header)
             <x-table.th :$header name="amount" />
         @endscope
 
+        @scope('cell_amount', $opportunity)
+            <span>R$ {{ number_format($opportunity->amount/100, 2, ',', '.') }}</span>
+        @endscope
+        {{-- End Amount --}}
+
+        {{-- Actions --}}
         @scope('actions', $opportunity)
             <div class="flex items-center justify-center gap-2">
                 {{-- update --}}

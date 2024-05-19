@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    /** @var \App\Livewire\Opportunities\Form $form */
     public Form $form;
 
     public bool $modal = false;
