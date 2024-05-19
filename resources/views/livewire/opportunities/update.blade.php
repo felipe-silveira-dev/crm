@@ -16,6 +16,7 @@
             <x-input label="Amount" wire:model="form.amount"
                      prefix="R$" locale="pt-BR" money
                     />
+            <x-input label="Custoemr" wire:model="form.customer_id" />
             </div>
             <x-slot:actions>
                 <x-button label="Cancel" @click="$wire.modal = false" />
