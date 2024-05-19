@@ -4,19 +4,48 @@ namespace Database\Seeders;
 
 use App\Enums\Can;
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()
-            ->withPermission(Can::BE_AN_ADMIN)
-            ->create([
-                'name'  => 'Silveira Developer',
-                'email' => 'admin@crm.com',
-            ]);
-        User::factory()->count(100)->create();
-        User::factory()->count(10)->deleted()->create();
+        $admin = User::factory()
+                    ->withPermission(Can::BE_AN_ADMIN)
+                    ->create([
+                        'name'     => 'Silveira Developer',
+                        'email'    => 'admin@crm.com',
+                        'password' => 'password',
+                    ]);
+
+        $this->normalUsers();
+        $this->deletedUsers($admin);
+    }
+
+    public function normalUsers(): void
+    {
+        User::query()->insert(
+            array_map(
+                fn () => (new UserFactory())->definition(),
+                range(1, 50)
+            )
+        );
+    }
+
+    public function deletedUsers(User $admin): void
+    {
+        User::query()->insert(
+            array_map(
+                fn () => array_merge(
+                    (new UserFactory())->definition(),
+                    [
+                        'deleted_at' => now(),
+                        'deleted_by' => $admin->id,
+                    ]
+                ),
+                range(1, 50)
+            )
+        );
     }
 }

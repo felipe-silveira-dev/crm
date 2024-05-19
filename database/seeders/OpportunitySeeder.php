@@ -9,6 +9,8 @@ class OpportunitySeeder extends Seeder
 {
     public function run(): void
     {
-        Opportunity::factory(100)->create();
+        Opportunity::factory(100)->create([
+            'customer_id' => rand(1, 100),
+        ]);
     }
 }

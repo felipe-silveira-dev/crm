@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\{Customer, Opportunity};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             UsersSeeder::class,
-            CustomerSeeder::class,
-            OpportunitySeeder::class,
         ]);
+
+        $customers     = Customer::factory(100)->create();
+        $opportunities = Opportunity::factory(100)->recycle($customers)->create();
     }
 }
