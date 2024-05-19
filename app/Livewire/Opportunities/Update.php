@@ -12,8 +12,6 @@ class Update extends Component
 {
     public Form $form;
 
-    public Collection|array $customers = [];
-
     public bool $modal = false;
 
     public function render(): View
@@ -51,18 +49,6 @@ class Update extends Component
 
     public function search(string $value = ''): void
     {
-        $selectedCustomerId = $this->form->customer_id;
-
-        $this->customers = Customer::query()
-                ->select('id', 'name')
-                ->where('name', 'like', "%$value%")
-                ->limit(5)
-                ->orderBy('name')
-                ->get()
-                ->merge(
-                    $selectedCustomerId
-                    ? Customer::query()->select('id', 'name')->whereId($selectedCustomerId)->get()
-                    : []
-                );
+        $this->form->searchCustomers($value);
     }
 }
