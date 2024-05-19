@@ -2,14 +2,17 @@
 
 namespace App\Livewire\Opportunities;
 
-use App\Models\Opportunity;
+use App\Models\{Customer, Opportunity};
 use Illuminate\Contracts\View\View;
-use Livewire\Attributes\On;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
 class Update extends Component
 {
     public Form $form;
+
+    public Collection|array $customers = [];
 
     public bool $modal = false;
 
@@ -18,12 +21,21 @@ class Update extends Component
         return view('livewire.opportunities.update');
     }
 
+    #[Computed('customers')]
+    public function customers(): Collection
+    {
+        return Customer::query()
+                ->select('id', 'name')
+                ->get();
+    }
+
     #[On('opportunity::update')]
     public function load(int $opportunityId): void
     {
-        $opportunity = Opportunity::findOrFail($opportunityId);
+        $opportunity = Opportunity::query()->whereId($opportunityId)->firstOrFail();
         $this->form->setOpportunity($opportunity);
         $this->form->resetErrorBag();
+        $this->search();
         $this->modal = true;
     }
 
@@ -35,5 +47,22 @@ class Update extends Component
 
         $this->modal = false;
         $this->dispatch('opportunity::reload')->to('opportunities.index');
+    }
+
+    public function search(string $value = ''): void
+    {
+        $selectedCustomerId = $this->form->customer_id;
+
+        $this->customers = Customer::query()
+                ->select('id', 'name')
+                ->where('name', 'like', "%$value%")
+                ->limit(5)
+                ->orderBy('name')
+                ->get()
+                ->merge(
+                    $selectedCustomerId
+                    ? Customer::query()->select('id', 'name')->whereId($selectedCustomerId)->get()
+                    : []
+                );
     }
 }

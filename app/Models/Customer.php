@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Models\HasSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
 class Customer extends Model
@@ -18,4 +19,9 @@ class Customer extends Model
         'phone',
         'type',
     ];
+
+    public function opportunities(): HasMany
+    {
+        return $this->hasMany(Opportunity::class);
+    }
 }

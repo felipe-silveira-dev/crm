@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $customers     = Customer::factory(100)->create();
-        $opportunities = Opportunity::factory(100)->recycle($customers)->create();
+        $opportunities = Opportunity::factory(300)->recycle($customers)->create();
     }
 }

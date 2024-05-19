@@ -3,6 +3,13 @@
         <x-form wire:submit="save" id="update-opportunity-form">
             <hr class="my-5" />
             <div class="space-y-2">
+                <x-choices
+                    label="Customer"
+                    wire:model="form.customer_id"
+                    :options="$this->customers"
+                    single
+                    searchable
+                />
                 <x-input label="Title" wire:model="form.title" />
                 <x-select
                 label="Status"
@@ -16,7 +23,6 @@
             <x-input label="Amount" wire:model="form.amount"
                      prefix="R$" locale="pt-BR" money
                     />
-            <x-input label="Custoemr" wire:model="form.customer_id" />
             </div>
             <x-slot:actions>
                 <x-button label="Cancel" @click="$wire.modal = false" />

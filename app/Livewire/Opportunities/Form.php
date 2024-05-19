@@ -26,18 +26,20 @@ class Form extends BaseForm
     {
         $this->opportunity = $opportunity;
 
-        $this->title  = $opportunity->title;
-        $this->status = $opportunity->status;
-        $this->amount = (string) ($opportunity->amount / 100);
+        $this->customer_id = $opportunity->customer_id;
+        $this->title       = $opportunity->title;
+        $this->status      = $opportunity->status;
+        $this->amount      = (string) ($opportunity->amount / 100);
     }
 
     public function update(): void
     {
         $this->validate();
 
-        $this->opportunity->title  = $this->title;
-        $this->opportunity->status = $this->status;
-        $this->opportunity->amount = $this->getAmountAsInt();
+        $this->opportunity->customer_id = $this->customer_id;
+        $this->opportunity->title       = $this->title;
+        $this->opportunity->status      = $this->status;
+        $this->opportunity->amount      = $this->getAmountAsInt();
 
         $this->opportunity->save();
     }
