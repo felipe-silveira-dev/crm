@@ -33,6 +33,7 @@ class Form extends BaseForm
         $this->title       = $opportunity->title;
         $this->status      = $opportunity->status;
         $this->amount      = (string) ($opportunity->amount / 100);
+
         $this->searchCustomers();
     }
 
@@ -45,7 +46,7 @@ class Form extends BaseForm
         $this->opportunity->status      = $this->status;
         $this->opportunity->amount      = $this->getAmountAsInt();
 
-        $this->opportunity->save();
+        $this->opportunity->update();
     }
 
     public function create(): void
@@ -78,7 +79,7 @@ class Form extends BaseForm
         $this->customers = Customer::query()
                 ->select('id', 'name')
                 ->where('name', 'like', "%$value%")
-                ->limit(5)
+                ->take(5)
                 ->orderBy('name')
                 ->get()
                 ->when(
