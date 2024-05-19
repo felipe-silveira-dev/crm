@@ -13,6 +13,7 @@ class Opportunity extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'customer_id',
         'title',
         'status',
         'amount',
