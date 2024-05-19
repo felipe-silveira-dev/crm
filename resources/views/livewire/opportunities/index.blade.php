@@ -35,6 +35,10 @@
             <x-table.th :$header name="title" />
         @endscope
 
+        @scope('header_customer', $header)
+            <x-table.th :$header name="customer" />
+        @endscope
+
         {{-- Status --}}
         @scope('header_status', $header)
             <x-table.th :$header name="status" />
@@ -59,7 +63,7 @@
         @endscope
 
         @scope('cell_amount', $opportunity)
-            <span>R$ {{ number_format($opportunity->amount/100, 2, ',', '.') }}</span>
+            <div class="whitespace-nowrap text-right">R$ {{ number_format($opportunity->amount/100, 2, ',', '.') }}</div>
         @endscope
         {{-- End Amount --}}
 

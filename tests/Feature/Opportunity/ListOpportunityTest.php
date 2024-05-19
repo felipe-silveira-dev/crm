@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Opportunities;
-use App\Models\{User, opportunity};
+use App\Models\{Customer, User, opportunity};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Livewire;
 
@@ -36,9 +36,10 @@ it('should list all opportunities in the page', function () {
 });
 
 it('should be able to filter by title', function () {
-    $user  = User::factory()->create(['name' => 'John Doe']);
-    $mario = Opportunity::factory()->create(['title' => 'Mario Silva']);
-    $joe   = Opportunity::factory()->create(['title' => 'Uva de Laranja']);
+    $user     = User::factory()->create(['name' => 'John Doe']);
+    $customer = Customer::factory()->create(['name' => 'Zack']);
+    $mario    = Opportunity::factory()->create(['title' => 'Joe Doe', 'customer_id' => $customer->id]);
+    $joe      = Opportunity::factory()->create(['title' => 'Mario', 'customer_id' => $customer->id]);
 
     actingAs($user);
 
@@ -54,7 +55,7 @@ it('should be able to filter by title', function () {
     ->assertSet('items', function ($items) {
         expect($items)
             ->toHaveCount(1)
-            ->first()->title->toBe('Mario Silva');
+            ->first()->title->toBe('Mario');
 
         return true;
     });
@@ -78,6 +79,20 @@ todo('shoul be able to list deleted opportunities', function () {
 
             return true;
         });
+});
+
+test('check the table format', function () {
+    $user = User::factory()->admin()->create();
+
+    actingAs($user);
+    Livewire::test(Opportunities\Index::class)
+        ->assertSet('headers', [
+            ['key' => 'id', 'label' => '#', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'title', 'label' => 'Title', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'customer_name', 'label' => 'Customer', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'status', 'label' => 'Status', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'amount', 'label' => 'Amount', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+        ]);
 });
 
 it('should be able to sort by title', function () {

@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Opportunities;
 
-use App\Models\Opportunity;
+use App\Models\{Customer, Opportunity};
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Validate;
 use Livewire\Form as BaseForm;
 
@@ -19,24 +20,33 @@ class Form extends BaseForm
     #[Validate(['required'])]
     public ?string $amount = null;
 
+    #[Validate(['required', 'exists:customers,id'])]
+    public ?int $customer_id = null;
+
+    public Collection|array $customers = [];
+
     public function setOpportunity(Opportunity $opportunity): void
     {
         $this->opportunity = $opportunity;
 
-        $this->title  = $opportunity->title;
-        $this->status = $opportunity->status;
-        $this->amount = (string) ($opportunity->amount / 100);
+        $this->customer_id = $opportunity->customer_id;
+        $this->title       = $opportunity->title;
+        $this->status      = $opportunity->status;
+        $this->amount      = (string) ($opportunity->amount / 100);
+
+        $this->searchCustomers();
     }
 
     public function update(): void
     {
         $this->validate();
 
-        $this->opportunity->title  = $this->title;
-        $this->opportunity->status = $this->status;
-        $this->opportunity->amount = $this->getAmountAsInt();
+        $this->opportunity->customer_id = $this->customer_id;
+        $this->opportunity->title       = $this->title;
+        $this->opportunity->status      = $this->status;
+        $this->opportunity->amount      = $this->getAmountAsInt();
 
-        $this->opportunity->save();
+        $this->opportunity->update();
     }
 
     public function create(): void
@@ -44,9 +54,10 @@ class Form extends BaseForm
         $this->validate();
 
         Opportunity::create([
-            'title'  => $this->title,
-            'status' => $this->status,
-            'amount' => $this->getAmountAsInt(),
+            'customer_id' => $this->customer_id,
+            'title'       => $this->title,
+            'status'      => $this->status,
+            'amount'      => $this->getAmountAsInt(),
         ]);
 
         $this->reset();
@@ -61,5 +72,21 @@ class Form extends BaseForm
         }
 
         return (int) ($amount * 100);
+    }
+
+    public function searchCustomers(string $value = ''): void
+    {
+        $this->customers = Customer::query()
+                ->select('id', 'name')
+                ->where('name', 'like', "%$value%")
+                ->take(5)
+                ->orderBy('name')
+                ->get()
+                ->when(
+                    filled($this->customer_id),
+                    fn ($q) => $q->merge(
+                        Customer::query()->select('id', 'name')->whereId($this->customer_id)->get()
+                    )
+                );
     }
 }

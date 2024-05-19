@@ -1,10 +1,10 @@
 <?php
 
 use App\Livewire\Opportunities;
-use App\Models\{User};
+use App\Models\{Customer, User};
 use Livewire\Livewire;
 
-use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas};
+use function Pest\Laravel\{actingAs, assertDatabaseHas};
 
 beforeEach(function () {
     $user = User::factory()->create();
@@ -12,32 +12,38 @@ beforeEach(function () {
 });
 
 it('should create a opportunity', function () {
+    $customer = Customer::factory()->create();
+
     Livewire::test(Opportunities\Create::class)
+        ->set('form.customer_id', $customer->id)
         ->set('form.title', 'John Doe')
+        ->assertPropertyWired('form.title')
         ->set('form.status', 'open')
+        ->assertPropertyWired('form.status')
         ->set('form.amount', '125.00')
+        ->assertPropertyWired('form.amount')
         ->call('save')
         ->assertHasNoErrors();
 
     assertDatabaseHas('opportunities', [
-        'title'  => 'John Doe',
-        'status' => 'open',
-        'amount' => '12500',
+        'customer_id' => $customer->id,
+        'title'       => 'John Doe',
+        'status'      => 'open',
+        'amount'      => '12500',
     ]);
 });
 
-it('should require a title', function () {
-    Livewire::test(Opportunities\Create::class)
-        ->set('form.title', '')
-        ->set('form.status', 'open')
-        ->set('form.amount', '150.00')
-        ->call('save')
-        ->assertHasErrors(['form.title' => 'required']);
-
-    assertDatabaseCount('opportunities', 0);
-});
-
 describe('validations', function () {
+    test('customer_id', function ($rule, $value) {
+        Livewire::test(Opportunities\Create::class)
+            ->set('form.customer_id', $value)
+            ->call('save')
+            ->assertHasErrors(['form.customer_id' => $rule]);
+    })->with([
+        'required' => ['required', ''],
+        'exists'   => ['exists', 999],
+    ]);
+
     test('title', function ($rule, $value) {
         Livewire::test(Opportunities\Create::class)
             ->set('form.title', $value)

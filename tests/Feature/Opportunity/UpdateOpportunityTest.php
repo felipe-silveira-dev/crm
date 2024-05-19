@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Opportunities;
-use App\Models\{Opportunity, User};
+use App\Models\{Customer, Opportunity, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\{actingAs, assertDatabaseHas};
@@ -13,8 +13,11 @@ beforeEach(function () {
 });
 
 it('should be able to update a opportunity', function () {
+    $customer = Customer::factory()->create();
+
     Livewire::test(Opportunities\Update::class)
         ->call('load', $this->opportunity->id)
+        ->set('form.customer_id', $customer->id)
         ->set('form.title', 'John Doe')
         ->set('form.status', 'won')
         ->set('form.amount', '120.00')
@@ -22,14 +25,26 @@ it('should be able to update a opportunity', function () {
         ->assertHasNoErrors();
 
     assertDatabaseHas('opportunities', [
-        'id'     => $this->opportunity->id,
-        'title'  => 'John Doe',
-        'status' => 'won',
-        'amount' => '12000',
+        'id'          => $this->opportunity->id,
+        'customer_id' => $customer->id,
+        'title'       => 'John Doe',
+        'status'      => 'won',
+        'amount'      => '12000',
     ]);
 });
 
 describe('validations', function () {
+    test('customer_id', function ($rule, $value) {
+        Livewire::test(Opportunities\Update::class)
+            ->call('load', $this->opportunity->id)
+            ->set('form.customer_id', $value)
+            ->call('save')
+            ->assertHasErrors(['form.customer_id' => $rule]);
+    })->with([
+        'required' => ['required', ''],
+        'exists'   => ['exists', 999],
+    ]);
+
     test('title', function ($rule, $value) {
         Livewire::test(Opportunities\Update::class)
             ->call('load', $this->opportunity->id)
