@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Livewire\Customers;
+namespace App\Livewire\Opportunities;
 
 use App\Helpers\Table\Header;
-use App\Models\Customer;
+use App\Models\Opportunity;
 use App\Traits\Livewire\HasTable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\{Component, WithPagination};
 
-/**
- * @property-read LengthAwarePaginator $customers
- */
 class Index extends Component
 {
     use WithPagination;
@@ -21,29 +17,29 @@ class Index extends Component
 
     public bool $searchTrash = false;
 
-    #[On('customer::reload')]
+    #[On('opportunity::reload')]
     public function render(): View
     {
-        return view('livewire.customers.index');
+        return view('livewire.opportunities.index');
     }
 
     public function query(): Builder
     {
-        return Customer::query()->when($this->searchTrash, fn (Builder $q) => $q->onlyTrashed());
+        return Opportunity::query()->when($this->searchTrash, fn (Builder $q) => $q->onlyTrashed());
     }
 
     public function searchColumns(): array
     {
-        return ['name', 'email', 'phone'];
+        return ['title', 'status'];
     }
 
     public function tableHeaders(): array
     {
         return [
             Header::make('id', '#'),
-            Header::make('name', 'Name'),
-            Header::make('email', 'Email'),
-            Header::make('phone', 'Phone'),
+            Header::make('title', 'Title'),
+            Header::make('status', 'Status'),
+            Header::make('amount', 'Amount'),
         ];
     }
 }

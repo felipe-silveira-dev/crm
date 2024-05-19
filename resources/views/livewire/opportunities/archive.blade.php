@@ -1,6 +1,6 @@
 <x-modal wire:model="modal"
          title="Archive Confirmation"
-         subtitle="You are archive the customer {{ $customer?->name }}">
+         subtitle="You are archive the opportunity {{ $opportunity?->name }}">
 
     <x-slot:actions>
         <x-button label="Cancel" @click="$wire.modal = false" />
