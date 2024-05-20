@@ -35,6 +35,24 @@ class Board extends Component
             ->get();
     }
 
+    #[Computed]
+    public function opens(): Collection
+    {
+        return $this->opportunities->where('status', 'open');
+    }
+
+    #[Computed]
+    public function wons(): Collection
+    {
+        return $this->opportunities->where('status', 'won');
+    }
+
+    #[Computed]
+    public function losts(): Collection
+    {
+        return $this->opportunities->where('status', 'lost');
+    }
+
     public function updateOpportunities(array $data)
     {
         $order = collect();
@@ -47,14 +65,22 @@ class Board extends Component
             );
         }
 
-        $sortOrder = $order->join(',');
         $open      = explode(',', $order[0]);
         $won       = explode(',', $order[1]);
         $lost      = explode(',', $order[2]);
+        $sortOrder = $order->filter(fn ($f) => filled($f))->join(',');
 
-        DB::table('opportunities')->whereIn('id', $open)->update(['status' => 'open']);
-        DB::table('opportunities')->whereIn('id', $won)->update(['status' => 'won']);
-        DB::table('opportunities')->whereIn('id', $lost)->update(['status' => 'lost']);
+        if(filled($order[0])) {
+            DB::table('opportunities')->whereIn('id', $open)->update(['status' => 'open']);
+        }
+
+        if(filled($order[1])) {
+            DB::table('opportunities')->whereIn('id', $won)->update(['status' => 'won']);
+        }
+
+        if(filled($order[2])) {
+            DB::table('opportunities')->whereIn('id', $lost)->update(['status' => 'lost']);
+        }
         DB::table('opportunities')->update(['sort_order' => DB::raw("field(id, $sortOrder)")]);
     }
 }
