@@ -112,7 +112,7 @@ it('should update opportunities', function () {
         ->and($opp3)->status->toBe('won')->sort_order->toBe(2)
         ->and($opp4)->status->toBe('won')->sort_order->toBe(3)
         ->and($opp5)->status->toBe('lost')->sort_order->toBe(5);
-})->only();
+});
 
 it('should be able to update the board even if one of the statuses in empty', function ($status) {
     $opportunity = Opportunity::factory()->create(['status' => $status]);

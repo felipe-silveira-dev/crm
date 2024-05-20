@@ -5,6 +5,7 @@ namespace App\Livewire\Opportunities;
 use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -53,7 +54,14 @@ class Board extends Component
         return $this->opportunities->where('status', 'lost');
     }
 
-    public function updateOpportunities(array $data)
+    public function updateOpportunities(array $data): void
+    {
+        $order = $this->getItemsInOrder($data);
+        $this->updateStatuses($order);
+        $this->updateSortOrders($order);
+    }
+
+    private function getItemsInOrder(array $data): SupportCollection
     {
         $order = collect();
 
@@ -65,22 +73,37 @@ class Board extends Component
             );
         }
 
-        $open      = explode(',', $order[0]);
-        $won       = explode(',', $order[1]);
-        $lost      = explode(',', $order[2]);
+        return $order;
+    }
+
+    private function updateStatuses(SupportCollection $collection): void
+    {
+        foreach(['open', 'won', 'lost'] as $status) {
+            $this->updateStatus($status, $collection);
+        }
+    }
+
+    public function updateStatus(string $status, SupportCollection $collection): void
+    {
+        $id = match($status) {
+            'open'  => 0,
+            'won'   => 1,
+            'lost'  => 2,
+            default => null,
+        };
+
+        $list = $collection[$id];
+        $ids  = explode(',', $list);
+
+        if(filled($list)) {
+            DB::table('opportunities')->whereIn('id', $ids)->update(['status' => $status]);
+        }
+    }
+
+    private function updateSortOrders(SupportCollection $order): void
+    {
         $sortOrder = $order->filter(fn ($f) => filled($f))->join(',');
 
-        if(filled($order[0])) {
-            DB::table('opportunities')->whereIn('id', $open)->update(['status' => 'open']);
-        }
-
-        if(filled($order[1])) {
-            DB::table('opportunities')->whereIn('id', $won)->update(['status' => 'won']);
-        }
-
-        if(filled($order[2])) {
-            DB::table('opportunities')->whereIn('id', $lost)->update(['status' => 'lost']);
-        }
         DB::table('opportunities')->update(['sort_order' => DB::raw("field(id, $sortOrder)")]);
     }
 }
