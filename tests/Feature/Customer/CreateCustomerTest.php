@@ -103,7 +103,7 @@ it('should be able to create a customer without a phone', function () {
         ->assertHasNoErrors();
 });
 
-it('should require a valid phone', function () {
+todo('should require a valid phone', function () {
     Livewire::test(Customers\Create::class)
         ->set('form.name', 'John Doe')
         ->set('form.email', 'john@doe.com')
@@ -112,7 +112,7 @@ it('should require a valid phone', function () {
         ->assertHasErrors(['form.phone' => 'phone']);
 
     assertDatabaseCount('customers', 0);
-})->skip();
+});
 
 describe('validations', function () {
     test('name', function ($rule, $value) {
