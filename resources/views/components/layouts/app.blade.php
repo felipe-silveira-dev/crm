@@ -50,14 +50,14 @@
                     </x-list-item>
                 @endif
 
-                <x-menu-item title="Home" icon="o-home" :link="route('dashboard')" />
-                <x-menu-item title="Customers" icon="o-building-storefront" :link="route('customers')" />
-                <x-menu-item title="Opportunities" icon="o-currency-dollar" :link="route('opportunities')" />
+                <x-menu-item title="{{__('Home')}}" icon="o-home" :link="route('dashboard')" />
+                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" :link="route('customers')" />
+                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" :link="route('opportunities')" />
 
                 @can(\App\Enums\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
-                        <x-menu-item title="Dashboard" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" />
-                        <x-menu-item title="Users" icon="o-users" link="{{ route('admin.users') }}" />
+                        <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" />
+                        <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" />
                     </x-menu-sub>
                 @endcan
             </x-menu-item>

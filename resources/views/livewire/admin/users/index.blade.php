@@ -3,21 +3,21 @@
 
     <div class="flex items-center mb-4 space-x-4">
         <div class="w-1/3">
-            <x-input label="Search by name or email" icon="o-magnifying-glass" wire:model.live="search"
-                placeholder="Search users..." />
+            <x-input label="{{__('Search by name or email')}}" icon="o-magnifying-glass" wire:model.live="search"
+                placeholder="{{__('Search users...')}}" />
         </div>
 
-        <x-choices label="Permissions" wire:model.live="search_permissions" :options="$permissionsToSearch" option-label="key"
+        <x-choices label="{{__('Permissions')}}" wire:model.live="search_permissions" :options="$permissionsToSearch" option-label="key"
             search-function="searchPermissions" searchable />
 
-        <x-checkbox label="Show Deleted Users" wire:model.live="search_trash" right />
+        <x-checkbox label="{{__('Show Deleted Users')}}" wire:model.live="search_trash" right />
 
         <x-select wire:model.live="perPage" :options="[
             ['id' => 5, 'name' => 5],
             ['id' => 15, 'name' => 15],
             ['id' => 25, 'name' => 25],
             ['id' => 50, 'name' => 50],
-        ]" label="Records Per Page" />
+        ]" label="{{__('Records Per Page')}}" />
     </div>
 
     <x-table :headers="$this->headers" :rows="$this->items" class="mb-4">
@@ -26,11 +26,11 @@
         @endscope
 
         @scope('header_name', $header)
-            <x-table.th :$header name="name" />
+            <x-table.th :$header name="{{__('name')}}" />
         @endscope
 
         @scope('header_email', $header)
-            <x-table.th :$header name="email" />
+            <x-table.th :$header name="{{__('email')}}" />
         @endscope
 
 

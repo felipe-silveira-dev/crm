@@ -8,7 +8,7 @@
         title="{{ $status }}"
         size="text-xl"
         class="px-2 pb-0 mb-2"
-        subtitle="Total {{ $items->count() }} Opportunities"
+        subtitle="Total {{ $items->count() . __('Opportunities')}}"
         separator progress-indcator
     />
     <ul
@@ -18,7 +18,7 @@
     >
         @empty($items->count())
             <li wire:key='"opportunity-null' class="h-10 border-dashed border-gray-400 border rounded w-full text-center flex items-center justify-center opacity-40">
-                Empty List
+                {{__('Empty List')}}
             </li>
         @endempty
         @foreach ($items as $item)

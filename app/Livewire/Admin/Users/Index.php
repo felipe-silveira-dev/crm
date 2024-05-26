@@ -61,10 +61,10 @@ class Index extends Component
     {
         return [
             Header::make('id', '#'),
-            Header::make('name', 'Name'),
-            Header::make('email', 'Email'),
-            Header::make('permissions', 'Permissions'),
-            Header::make('actions', 'Actions'),
+            Header::make('name', __('Name')),
+            Header::make('email', __('Email')),
+            Header::make('permissions', __('Permissions')),
+            Header::make('actions', __('Actions')),
         ];
     }
 
