@@ -1,7 +1,7 @@
 <x-modal wire:model="modal"
          title="{{__('Restore Confirmation')}}"
          subtitle="{{__('You are restoring access for the :username', ['username', $user?->name])}}"
-         separator>
+        >
 
     @error('confirmation')
     <x-alert icon="o-exclamation-triangle" class="mb-4 alert-error">

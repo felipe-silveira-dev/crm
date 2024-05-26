@@ -1,5 +1,5 @@
 <div>
-    <x-header title="{{__('Opportunities')}}" separator progress-indicator />
+    <x-header title="{{__('Opportunities')}}" />
 
     <div class="flex items-end justify-between mb-4">
         <div class="flex items-end w-full space-x-4">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="dracula" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="business" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -21,13 +21,13 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" collapsible class="pt-3">
+        <x-slot:sidebar drawer="main-drawer" class="pt-3">
 
             <!-- Hidden when collapsed -->
-            <div class="ml-5 text-4xl font-black hidden-when-collapsed">CRM-DEV</div>
+            <div class="ml-5 text-4xl font-black hidden-when-collapsed">Strategy</div>
 
             <!-- Display when collapsed -->
-            <div class="ml-5 text-4xl font-black display-when-collapsed">C</div>
+            <div class="ml-5 text-4xl font-black display-when-collapsed">ST</div>
 
             <!-- Custom `active menu item background color` -->
             {{-- Side bar items! --}}
@@ -50,16 +50,19 @@
                     </x-list-item>
                 @endif
 
-                <x-menu-item title="{{__('Home')}}" icon="o-home" :link="route('dashboard')" />
-                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" :link="route('customers')" />
-                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" :link="route('opportunities')" />
-
+                {{-- Admin --}}
                 @can(\App\Enums\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
                         <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" />
                         <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" />
                     </x-menu-sub>
                 @endcan
+
+                {{--  --}}
+                <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" :link="route('dashboard')" />
+                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" :link="route('customers')" />
+                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" :link="route('opportunities')" />
+
             </x-menu-item>
         </x-slot:sidebar>
 

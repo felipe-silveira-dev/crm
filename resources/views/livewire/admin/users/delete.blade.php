@@ -1,7 +1,6 @@
 <x-modal wire:model="modal"
          title="{{__('Deletion Confirmation')}}"
-         subtitle="{{__('You are deleting the user :username', ['username' => $user?->name])}}"
-         separator>
+         subtitle="{{__('You are deleting the user :username', ['username' => $user?->name])}}">
 
     @error('confirmation')
     <x-alert icon="o-exclamation-triangle" class="mb-4 alert-error">

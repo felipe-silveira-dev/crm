@@ -1,5 +1,5 @@
 <div>
-    <x-header title="Users" separator progress-indicator />
+    <x-header title="Users" />
 
     <div class="flex items-center mb-4 space-x-4">
         <div class="w-1/3">

@@ -39,7 +39,7 @@ export default {
                     error: "#dc3545",    /* Red for Error */
                 },
             },
-            'dracula'
+            'business'
         ],
     },
 

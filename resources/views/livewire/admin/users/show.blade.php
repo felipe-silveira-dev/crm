@@ -4,7 +4,7 @@
         class="w-1/3"
         right
     >
-        <x-card title="{{ $user?->name }}" separator>
+        <x-card title="{{ $user?->name }}" >
             @isset($this->user)
                 <x-input label="{{__('Name')}}" value="{{ $this->user->name }}" readonly class="mb-4" />
                 <x-input label="{{__('Email')}}" value="{{ $this->user->email }}" readonly class="mb-4" />

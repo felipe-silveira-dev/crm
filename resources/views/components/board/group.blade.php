@@ -7,9 +7,8 @@
     <x-header
         title="{{__($status)}}"
         size="text-xl"
-        class="px-2 pb-0 mb-2"
+        class="px-2 pb-0 mb-2 capitalize"
         subtitle="{{__('Total :count Opportunities', ['count' => $items->count()])}}"
-        separator progress-indcator
     />
     <ul
         wire:sortable-group.item-group="{{ $status }}"
