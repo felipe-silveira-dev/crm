@@ -62,23 +62,24 @@ it('should be able to filter by name and email', function () {
 
 it('shoul be able to list deleted customers', function () {
     $admin            = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@gmail.com']);
-    $deletedcustomers = User::factory()->count(2)->create(['deleted_at' => now()]);
+    $deletedcustomers = Customer::factory()->count(2)->create(['deleted_at' => now()]);
+    $customer         = Customer::factory()->create();
 
     actingAs($admin);
     Livewire::test(Customers\Index::class)
-        ->assertSet('customers', function ($customers) {
-            expect($customers)->toHaveCount(1);
+        ->assertSet('items', function ($items) {
+            expect($items)->toHaveCount(1);
 
             return true;
         })
-        ->set('search_trash', true)
-        ->assertSet('customers', function ($customers) {
-            expect($customers)
+        ->set('searchTrash', true)
+        ->assertSet('items', function ($items) {
+            expect($items)
                 ->toHaveCount(2);
 
             return true;
         });
-})->skip();
+});
 
 it('should be able to sort by name', function () {
     $user  = User::factory()->create(['name' => 'Joe Doe', 'email' => 'admin@crm.com']);

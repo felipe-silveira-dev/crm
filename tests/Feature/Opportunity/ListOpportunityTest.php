@@ -61,20 +61,22 @@ it('should be able to filter by title', function () {
     });
 });
 
-todo('shoul be able to list deleted opportunities', function () {
-    $admin                = User::factory()->admin()->create(['title' => 'Joe Doe']);
-    $deletedopportunities = User::factory()->count(2)->create(['deleted_at' => now()]);
+it('should be able to list deleted opportunities', function () {
+    $admin                = User::factory()->admin()->create(['name' => 'Joe Doe']);
+    $deletedopportunities = Opportunity::factory()->count(2)->create(['deleted_at' => now()]);
+    $opportunity          = Opportunity::factory()->count(4)->create();
 
     actingAs($admin);
     Livewire::test(Opportunities\Index::class)
-        ->assertSet('opportunities', function ($opportunities) {
-            expect($opportunities)->toHaveCount(1);
+        ->assertSet('items', function ($items) {
+            expect($items)
+                ->toHaveCount(4);
 
             return true;
         })
-        ->set('search_trash', true)
-        ->assertSet('opportunities', function ($opportunities) {
-            expect($opportunities)
+        ->set('searchTrash', true)
+        ->assertSet('items', function ($items) {
+            expect($items)
                 ->toHaveCount(2);
 
             return true;
@@ -88,10 +90,10 @@ test('check the table format', function () {
     Livewire::test(Opportunities\Index::class)
         ->assertSet('headers', [
             ['key' => 'id', 'label' => '#', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'title', 'label' => 'Title', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'customer_name', 'label' => 'Customer', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'status', 'label' => 'Status', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'amount', 'label' => 'Amount', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'title', 'label' => __('Title'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'customer_name', 'label' => __('Customer'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'status', 'label' => __('Status'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'amount', 'label' => __('Amount'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
         ]);
 });
 
