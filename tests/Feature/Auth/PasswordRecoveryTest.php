@@ -21,10 +21,10 @@ it('should be able to request for a password recovery', function () {
     $user = User::factory()->create();
 
     Livewire::test(Recovery::class)
-        ->assertDontSee('We have e-mailed your password reset link!')
+        ->assertDontSee(__('We have e-mailed your password reset link!'))
         ->set('email', $user->email)
         ->call('startPasswordRecovery')
-        ->assertSee('We have e-mailed your password reset link!');
+        ->assertSee(__('We have e-mailed your password reset link!'));
 
     Notification::assertSentTo($user, ResetPassword::class);
 });

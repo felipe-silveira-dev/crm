@@ -13,7 +13,7 @@
         <x-slot:actions>
             <div class="flex items-center justify-between w-full">
                 <a wire:navigate href="{{ route('login') }}" class="link link-primary">
-                   {{___('Never mind, get back to login page.')}}
+                   {{__('Never mind, get back to login page.')}}
                 </a>
                 <div>
                     <x-button label="{{__('Reset')}}" class="btn-primary" type="submit" spinner="submit"/>
