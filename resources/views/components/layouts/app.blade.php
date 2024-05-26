@@ -21,7 +21,7 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" class="pt-3">
+        <x-slot:sidebar drawer="main-drawer" class="pt-3 border-r border-neutral">
 
             <!-- Hidden when collapsed -->
             <div class="ml-5 text-4xl font-black hidden-when-collapsed">Strategy</div>
@@ -29,16 +29,26 @@
             <!-- Display when collapsed -->
             <div class="ml-5 text-4xl font-black display-when-collapsed">ST</div>
 
-            <!-- Custom `active menu item background color` -->
-            {{-- Side bar items! --}}
-            <x-menu activate-by-route active-bg-color="bg-base-300/10">
+            <x-menu activate-by-route>
+
+                {{-- Admin --}}
+                @can(\App\Enums\Can::BE_AN_ADMIN->value)
+                    <x-menu-sub title="Admin" icon="o-lock-closed">
+                        <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}"  />
+                        <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}"  />
+                    </x-menu-sub>
+                @endcan
+
+                {{--  --}}
+                <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" link="{{route('dashboard')}}"  />
+                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" link="{{route('customers')}}" />
+                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" link="{{route('opportunities')}}"  />
 
                 <!-- User -->
                 @if ($user = auth()->user())
-                    <x-list-item :item="$user" sub-value="username" no-separator no-hover
-                        class="!-mx-2 mt-2 mb-5 border-y border-y-sky-900">
+                    <x-list-item :item="$user" sub-value="username" no-separator no-hover>
                         <x-slot:actions>
-                            <div class="tooltip tooltip-left" data-tip="logoff">
+                            <div class="tooltip tooltip-left" data-tip="{{__('logoff')}}">
                                 <x-button
                                     icon="o-power"
                                     class="btn-circle btn-ghost btn-xs"
@@ -49,19 +59,6 @@
                         </x-slot:actions>
                     </x-list-item>
                 @endif
-
-                {{-- Admin --}}
-                @can(\App\Enums\Can::BE_AN_ADMIN->value)
-                    <x-menu-sub title="Admin" icon="o-lock-closed">
-                        <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" />
-                        <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" />
-                    </x-menu-sub>
-                @endcan
-
-                {{--  --}}
-                <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" :link="route('dashboard')" />
-                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" :link="route('customers')" />
-                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" :link="route('opportunities')" />
 
             </x-menu-item>
         </x-slot:sidebar>
