@@ -48,7 +48,7 @@ class Index extends Component
                 fn (Builder $q) => $q->whereIn('id', $this->search_permissions)
             )
         )
-        ->when($this->search_trash, fn (Builder $q) => $q->onlyTrashed()); /** @phpstan-ignore-line */
+        ->when($this->search_trash, fn (Builder $q) => $q->onlyTrashed());
 
     }
 

@@ -34,15 +34,15 @@
                 {{-- Admin --}}
                 @can(\App\Enums\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
-                        <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}"  />
-                        <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}"  />
+                        <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" route="admin.dashboard"  />
+                        <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" route="admin.users"  />
                     </x-menu-sub>
                 @endcan
 
                 {{--  --}}
-                <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" link="{{route('dashboard')}}"  />
-                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" link="{{route('customers')}}" />
-                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" link="{{route('opportunities')}}"  />
+                <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" link="{{route('dashboard')}}" route="dashboard" />
+                <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" link="{{route('customers')}}" route="customers" />
+                <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" link="{{route('opportunities')}}" route="opportunities" />
 
                 <!-- User -->
                 @if ($user = auth()->user())
