@@ -1,9 +1,9 @@
 <x-modal wire:model="modal"
-         title="Archive Confirmation"
-         subtitle="You are archive the opportunity {{ $opportunity?->name }}">
+         title="{{__('Archive Confirmation')}}"
+         subtitle="{{__('Are you sure you want to archive the opportunity :title?', ['title' => $opportunity?->title])}}">
 
     <x-slot:actions>
-        <x-button label="Cancel" @click="$wire.modal = false" />
-        <x-button label="Confirm" class="btn-primary" wire:click="archive"/>
+        <x-button label="{{__('Cancel')}}" @click="$wire.modal = false" />
+        <x-button label="{{__('Confirm')}}" class="btn-primary" wire:click="archive"/>
     </x-slot:actions>
 </x-modal>

@@ -237,6 +237,19 @@
     "Show Deleted Users": "Mostrar Usuários Excluídos",
     "Show archived": "Mostrar Arquivados",
     "Create Customer": "Criar Cliente",
-    "You are restoring customer :name": "Você está restaurando o cliente :name."
-
+    "You are restoring customer :name": "Você está restaurando o cliente :name.",
+    "Total :count Opportunities": "Total de :count Oportunidades",
+    "open": "abertas",
+    "won": "ganhas",
+    "lost": "perdidas",
+    "Update Customer": "Atualizar Cliente",
+    "Select an user": "Selecione um usuário",
+    "Are you sure you want to archive the opportunity :title?": "Tem certeza que deseja arquivar a oportunidade :title?",
+    "Title": "Título",
+    "Amount": "Valor",
+    "Create Opportunity": "Criar Oportunidade",
+    "Search by title": "Pesquisar por título",
+    "Search opportunities...": "Pesquisar oportunidades...",
+    "You are restoring opportunity :title": "Você está restaurando a oportunidade :title.",
+    "Update Opportunity": "Atualizar Oportunidade"
 }

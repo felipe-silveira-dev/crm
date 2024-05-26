@@ -43,10 +43,10 @@ class Index extends Component
     {
         return [
             Header::make('id', '#'),
-            Header::make('title', 'Title'),
-            Header::make('customer_name', 'Customer'),
-            Header::make('status', 'Status'),
-            Header::make('amount', 'Amount'),
+            Header::make('title', __('Title')),
+            Header::make('customer_name', __('Customer')),
+            Header::make('status', __('Status')),
+            Header::make('amount', __('Amount')),
         ];
     }
 }

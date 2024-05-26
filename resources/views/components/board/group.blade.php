@@ -5,10 +5,10 @@
 
 <div class="bg-base-200 p-2" wire:key="group-{{ $status }}">
     <x-header
-        title="{{ $status }}"
+        title="{{__($status)}}"
         size="text-xl"
         class="px-2 pb-0 mb-2"
-        subtitle="Total {{ $items->count() . __('Opportunities')}}"
+        subtitle="{{__('Total :count Opportunities', ['count' => $items->count()])}}"
         separator progress-indcator
     />
     <ul
