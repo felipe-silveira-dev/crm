@@ -19,21 +19,21 @@
     @endif
 
     <x-form wire:submit="tryToLogin">
-        <x-input label="Email" wire:model="email"/>
-        <x-input label="Password" wire:model="password" type="password"/>
+        <x-input label="{{__('Email')}}" wire:model="email"/>
+        <x-input label="{{__('Password')}}" wire:model="password" type="password"/>
         <x-slot:actions>
             <div class="flex items-center justify-between w-full">
                 <a wire:navigate href="{{ route('auth.register') }}" class="link link-primary">
-                    I want to create an account
+                    {{__('I want to create an account')}}
                 </a>
                 <div>
-                    <x-button label="Login" class="btn-primary" type="submit" spinner="submit"/>
+                    <x-button label="{{__('Login')}}" class="btn-primary" type="submit" spinner="submit"/>
                 </div>
             </div>
         </x-slot:actions>
         <div class="flex items-center justify-between w-full mt-4">
             <a wire:navigate href="{{ route('password.recovery') }}" class="link link-primary">
-                I forgot my password
+                {{__('I forgot my password')}}
             </a>
         </div>
     </x-form>

@@ -8,17 +8,17 @@
 
     <x-form wire:submit="handle">
         <p>
-            We sent you a code. Please check your email.
+            {{__('We sent you a code. Please check your email.')}}
         </p>
         <x-input label="Code" wire:model="code"/>
 
         <x-slot:actions>
             <div class="flex items-center justify-between w-full">
                 <a wire:click="sendNewCode" class="link link-primary">
-                    Send a new code
+                    {{__('Send a new code')}}
                 </a>
                 <div>
-                    <x-button label="Check Code" class="btn-primary" type="submit" spinner="submit"/>
+                    <x-button label="{{__('Check Code')}}" class="btn-primary" type="submit" spinner="submit"/>
                 </div>
             </div>
         </x-slot:actions>

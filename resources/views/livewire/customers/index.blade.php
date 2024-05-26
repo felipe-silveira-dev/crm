@@ -1,26 +1,26 @@
 <div>
-    <x-header title="Customers" separator progress-indicator />
+    <x-header title="{{__('Customers')}}" separator progress-indicator />
 
     <div class="flex items-end justify-between mb-4">
         <div class="flex items-end w-full space-x-4">
             {{-- Search --}}
             <div class="w-1/3">
-                <x-input label="Search by name or email" icon="o-magnifying-glass" wire:model.live="search"
-                    placeholder="Search customers..." />
+                <x-input label="{{__('Search by name or email')}}" icon="o-magnifying-glass" wire:model.live="search"
+                    placeholder="{{__('Search customers...')}}" />
             </div>
             {{-- Archived Customers --}}
-            <x-checkbox label="Show archived" wire:model.live="searchTrash" right />
+            <x-checkbox label="{{__('Show archived')}}" wire:model.live="searchTrash" right />
             {{-- Per Page --}}
             <x-select wire:model.live="perPage" :options="[
                 ['id' => 10, 'name' => 10],
                 ['id' => 15, 'name' => 15],
                 ['id' => 25, 'name' => 25],
                 ['id' => 50, 'name' => 50],
-            ]" label="Records Per Page" />
+            ]" label="{{__('Records Per Page')}}" />
         </div>
 
         <div class="flex space-x-4">
-            <x-button label="Create Customer" @click="$dispatch('customer::create')" class="btn-dark" icon="o-plus" />
+            <x-button label="{{__('Create Customer')}}" @click="$dispatch('customer::create')" class="btn-dark" icon="o-plus" />
         </div>
     </div>
 
@@ -43,16 +43,14 @@
 
         @scope('actions', $customer)
             <div class="flex items-center justify-center gap-2">
-                {{-- update --}}
-                <x-button id="update-btn-{{ $customer->id }}" wire:key="update-btn-{{ $customer->id }}" class="btn-sm"
-                    icon="o-pencil" @click="$dispatch('customer::update', { customerId: {{ $customer->id }} })" spinner />
-
-                {{-- Archive or Restore --}}
                 @unless ($customer->trashed())
+                    <x-button id="update-btn-{{ $customer->id }}" wire:key="update-btn-{{ $customer->id }}" class="btn-sm"
+                        icon="o-pencil" @click="$dispatch('customer::update', { customerId: {{ $customer->id }} })" spinner />
+
                     <x-button id="archive-btn-{{ $customer->id }}" wire:key="archive-btn-{{ $customer->id }}" class="btn-sm"
                         icon="o-trash" @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" spinner />
                 @else
-                        <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" spinner
+                    <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" spinner
                             class="btn-sm btn-success btn-ghost" />
                 @endunless
             </div>

@@ -1,6 +1,6 @@
 <x-modal wire:model="modal"
-         title="Deletion Confirmation"
-         subtitle="You are deleting the user {{ $user?->name }}"
+         title="{{__('Deletion Confirmation')}}"
+         subtitle="{{__('You are deleting the user :username', ['username' => $user?->name])}}"
          separator>
 
     @error('confirmation')
@@ -11,7 +11,7 @@
 
     <x-input
         class="input-sm"
-        label="Write `DART VADER` to confirm the deletion"
+        label="{{__('Write `DART VADER` to confirm the deletion')}}"
         wire:model="confirmation_confirmation"
     />
 

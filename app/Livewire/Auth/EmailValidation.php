@@ -50,6 +50,6 @@ class EmailValidation extends Component
             auth()->user()
         );
 
-        $this->sendNewCodeMessage = 'Code was sent to you. Check your mailbox.';
+        $this->sendNewCodeMessage = __('Code was sent to you. Check your mailbox.');
     }
 }
