@@ -6,11 +6,13 @@ use App\Models\{Opportunity};
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\{On};
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Update extends Component
 {
-    public Form $form;
+    use Toast;
 
+    public Form $form;
     public bool $modal = false;
 
     public function render(): View
@@ -32,6 +34,7 @@ class Update extends Component
         $this->form->update();
 
         $this->modal = false;
+        $this->success(__('Updated successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
 

@@ -6,11 +6,13 @@ use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Archive extends Component
 {
-    public Opportunity $opportunity;
+    use Toast;
 
+    public Opportunity $opportunity;
     public bool $modal = false;
 
     public function render(): View
@@ -29,6 +31,7 @@ class Archive extends Component
     {
         $this->opportunity->delete();
         $this->modal = false;
+        $this->success(__('Archived successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
 }

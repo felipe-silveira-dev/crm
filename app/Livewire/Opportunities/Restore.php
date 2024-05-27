@@ -6,11 +6,13 @@ use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Restore extends Component
 {
-    public Opportunity $opportunity;
+    use Toast;
 
+    public Opportunity $opportunity;
     public bool $modal = false;
 
     public function render(): View
@@ -29,6 +31,7 @@ class Restore extends Component
     {
         $this->opportunity->restore();
         $this->modal = false;
+        $this->success(__('Restored successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
 }

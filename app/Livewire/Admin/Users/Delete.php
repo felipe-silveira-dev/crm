@@ -40,7 +40,7 @@ class Delete extends Component
 
         if($this->user->is(auth()->user())) {
 
-            $this->addError('confirmation', "You can't delete yourself brow.");
+            $this->addError('confirmation', __("You can't delete yourself brow."));
 
             return;
         }
@@ -50,7 +50,7 @@ class Delete extends Component
         $this->user->save();
 
         $this->user->notify(new UserDeletedNotification());
-        $this->success('User deleted successfully.');
+        $this->success(__('User deleted successfully.'));
         $this->dispatch('user::deleted');
         $this->reset('modal');
     }
