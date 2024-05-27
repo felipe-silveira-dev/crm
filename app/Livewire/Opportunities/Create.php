@@ -30,6 +30,7 @@ class Create extends Component
         $this->form->create();
 
         $this->modal = false;
+        $this->success(__('Created successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
 

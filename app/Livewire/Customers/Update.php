@@ -6,11 +6,12 @@ use App\Models\Customer;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Update extends Component
 {
+    use Toast;
     public Form $form;
-
     public bool $modal = false;
 
     public function render(): View
@@ -35,6 +36,7 @@ class Update extends Component
         $this->form->update();
 
         $this->modal = false;
+        $this->success(__('Updated successfully.'));
         $this->dispatch('customer::reload')->to('customers.index');
     }
 }

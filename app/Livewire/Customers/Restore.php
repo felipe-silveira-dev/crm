@@ -6,11 +6,13 @@ use App\Models\Customer;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Restore extends Component
 {
-    public Customer $customer;
+    use Toast;
 
+    public Customer $customer;
     public bool $modal = false;
 
     public function render(): View
@@ -29,6 +31,7 @@ class Restore extends Component
     {
         $this->customer->restore();
         $this->modal = false;
+        $this->success(__('Restored successfully.'));
         $this->dispatch('customer::reload')->to('customers.index');
     }
 }

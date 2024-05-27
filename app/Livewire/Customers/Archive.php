@@ -6,9 +6,12 @@ use App\Models\Customer;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Archive extends Component
 {
+    use Toast;
+
     public Customer $customer;
 
     public bool $modal = false;
@@ -29,6 +32,7 @@ class Archive extends Component
     {
         $this->customer->delete();
         $this->modal = false;
+        $this->success(__('Archived successfully.'));
         $this->dispatch('customer::reload')->to('customers.index');
     }
 }

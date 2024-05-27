@@ -254,5 +254,13 @@
     "Update Opportunity": "Atualizar Oportunidade",
     "Search customers...": "Pesquisar clientes...",
     "Board": "Quadro",
-    "logoff": "sair"
+    "logoff": "sair",
+    "You can't delete yourself brow." : "Você não pode se excluir brow.",
+    "User deleted successfully." : "Usuário excluído com sucesso.",
+    "You can not impersonate yourself.": "Você não pode se passar por você mesmo.",
+    "User restored successfully.": "Usuário restaurado com sucesso.",
+    "Archived successfully.": "Arquivado com sucesso.",
+    "Created successfully.": "Criado com sucesso.",
+    "Restored successfully.": "Restaurado com sucesso.",
+    "Updated successfully.": "Atualizado com sucesso."
 }
