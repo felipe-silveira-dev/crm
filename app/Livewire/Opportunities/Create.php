@@ -5,11 +5,13 @@ namespace App\Livewire\Opportunities;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Create extends Component
 {
-    public Form $form;
+    use Toast;
 
+    public Form $form;
     public bool $modal = false;
 
     public function render(): View
