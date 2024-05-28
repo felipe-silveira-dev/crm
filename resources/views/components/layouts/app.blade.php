@@ -50,6 +50,11 @@
                         <x-slot:actions>
                             <div class="tooltip tooltip-left" data-tip="{{__('logoff')}}">
                                 <x-button
+                                    icon="o-pencil"
+                                    class="btn-circle btn-ghost btn-xs"
+                                    @click="$dispatch('user::update', { userId: {{ $user->id }} })"
+                                />
+                                <x-button
                                     icon="o-power"
                                     class="btn-circle btn-ghost btn-xs"
                                     wire:click="logout"
@@ -69,7 +74,7 @@
         </x-slot:content>
     </x-main>
     <livewire:auth.logout>
-
+    <livewire:auth.update>
 </body>
 
 </html>
