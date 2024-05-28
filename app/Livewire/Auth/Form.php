@@ -18,7 +18,7 @@ class Form extends BaseForm
     {
         return [
             'name'  => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email', 'max:255', Rule::unique('users')->ignore($this->user?->id, 'id')],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user?->id, 'id')],
         ];
     }
 
@@ -36,6 +36,10 @@ class Form extends BaseForm
 
         $this->user->name  = $this->name;
         $this->user->email = $this->email;
+
+        if ($this->email !== $this->user->email) {
+            $this->user->email_verified_at = null;
+        }
 
         $this->user->save();
     }
