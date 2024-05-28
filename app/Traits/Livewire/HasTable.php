@@ -17,7 +17,6 @@ trait HasTable
 
     public int $perPage = 10;
 
-    // Uma função abstrata obriga a classe que a implementa a definir a função
     /** @return Header[] */
     abstract public function tableHeaders(): array;
     abstract public function query(): Builder;

@@ -50,12 +50,12 @@
                             <x-button id="delete-btn-{{ $user->id }}" wire:key="delete-btn-{{ $user->id }}" icon="o-trash"
                                 wire:click="destroy('{{ $user->id }}')" spinner class="btn-sm" />
                         @endunless
+                        <x-button id="impersonate-btn-{{ $user->id }}" wire:key="impersonate-btn-{{ $user->id }}" icon="o-video-camera"
+                            wire:click="impersonate({{ $user->id }})" spinner class="btn-sm" />
                     @else
                         <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $user->id }})" spinner
                             class="btn-sm btn-success btn-ghost" />
                     @endunless
-                    <x-button id="impersonate-btn-{{ $user->id }}" wire:key="impersonate-btn-{{ $user->id }}" icon="o-video-camera"
-                        wire:click="impersonate({{ $user->id }})" spinner class="btn-sm" />
                 @endcan
             </div>
         @endscope
