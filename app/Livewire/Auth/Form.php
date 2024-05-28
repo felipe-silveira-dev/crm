@@ -10,15 +10,15 @@ class Form extends BaseForm
 {
     public ?User $user = null;
 
-    public string $name = '';
+    public ?string $name = null;
 
-    public string $email = '';
+    public ?string $email = null;
 
     public function rules(): array
     {
         return [
             'name'  => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user?->id, 'id')],
+            'email' => ['required', 'email', 'unique:users,email', 'max:255', Rule::unique('users')->ignore($this->user?->id, 'id')],
         ];
     }
 
@@ -38,17 +38,5 @@ class Form extends BaseForm
         $this->user->email = $this->email;
 
         $this->user->save();
-    }
-
-    public function create(): void
-    {
-        $this->validate();
-
-        User::create([
-            'name'  => $this->name,
-            'email' => $this->email,
-        ]);
-
-        $this->reset();
     }
 }

@@ -48,12 +48,14 @@
                 @if ($user = auth()->user())
                     <x-list-item :item="$user" sub-value="username" no-separator no-hover>
                         <x-slot:actions>
-                            <div class="tooltip tooltip-left" data-tip="{{__('logoff')}}">
+                            <div class="tooltip tooltip-left" data-tip="{{__('edit')}}">
                                 <x-button
                                     icon="o-pencil"
                                     class="btn-circle btn-ghost btn-xs"
                                     @click="$dispatch('user::update', { userId: {{ $user->id }} })"
                                 />
+                            </div>
+                            <div class="tooltip tooltip-left" data-tip="{{__('logoff')}}">
                                 <x-button
                                     icon="o-power"
                                     class="btn-circle btn-ghost btn-xs"
