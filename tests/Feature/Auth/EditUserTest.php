@@ -60,3 +60,17 @@ it('should be able to update my user data with the same email', function () {
     expect($user->refresh()->name)->toBe('John Doe');
     expect($user->refresh()->email)->toBe($user->email);
 });
+
+it('should set email_verified_at to null when updating the email', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    Livewire::test(Update::class)
+        ->call('load', $user->id)
+        ->set('form.name', 'John Doe')
+        ->set('form.email', 'john@doe')
+        ->call('save')
+        ->assertHasNoErrors();
+
+    expect($user->refresh()->email_verified_at)->toBeNull();
+});

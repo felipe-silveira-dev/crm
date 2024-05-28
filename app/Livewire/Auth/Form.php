@@ -9,10 +9,9 @@ use Livewire\Form as BaseForm;
 class Form extends BaseForm
 {
     public ?User $user = null;
-
     public ?string $name = null;
-
     public ?string $email = null;
+
 
     public function rules(): array
     {
@@ -34,12 +33,12 @@ class Form extends BaseForm
     {
         $this->validate();
 
-        $this->user->name  = $this->name;
-        $this->user->email = $this->email;
-
         if ($this->email !== $this->user->email) {
             $this->user->email_verified_at = null;
         }
+
+        $this->user->name  = $this->name;
+        $this->user->email = $this->email;
 
         $this->user->save();
     }
