@@ -12,7 +12,8 @@ class Create extends Component
     use Toast;
 
     public Form $form;
-    public bool $modal = false;
+
+    public bool $createModal = false;
 
     public function render(): View
     {
@@ -24,14 +25,14 @@ class Create extends Component
     {
         $this->form->resetErrorBag();
         $this->search();
-        $this->modal = true;
+        $this->createModal = true;
     }
 
     public function save(): void
     {
         $this->form->create();
 
-        $this->modal = false;
+        $this->createModal = false;
         $this->success(__('Created successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }

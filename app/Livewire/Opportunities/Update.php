@@ -13,7 +13,8 @@ class Update extends Component
     use Toast;
 
     public Form $form;
-    public bool $modal = false;
+
+    public bool $updateModal = false;
 
     public function render(): View
     {
@@ -26,14 +27,14 @@ class Update extends Component
         $opportunity = Opportunity::query()->whereId($opportunityId)->firstOrFail();
         $this->form->setOpportunity($opportunity);
         $this->form->resetErrorBag();
-        $this->modal = true;
+        $this->updateModal = true;
     }
 
     public function save(): void
     {
         $this->form->update();
 
-        $this->modal = false;
+        $this->updateModal = false;
         $this->success(__('Updated successfully.'));
         $this->dispatch('opportunity::reload')->to('opportunities.index');
     }
