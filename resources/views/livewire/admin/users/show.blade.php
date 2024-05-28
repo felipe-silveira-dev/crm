@@ -3,6 +3,7 @@
         wire:model="modal"
         class="w-1/3"
         right
+        with-close-button
     >
         <x-card title="{{ $user?->name }}" >
             @isset($this->user)

@@ -11,8 +11,11 @@ use Mary\Traits\Toast;
 class Update extends Component
 {
     use Toast;
+
+    /** @var \App\Livewire\Customers\Form $form */
     public Form $form;
-    public bool $modal = false;
+
+    public bool $updateModal = false;
 
     public function render(): View
     {
@@ -26,16 +29,14 @@ class Update extends Component
                         ->findOrFail($customerId);
         $this->form->setCustomer($customer);
         $this->form->resetErrorBag();
-        $this->modal = true;
+        $this->updateModal = true;
     }
 
     public function save(): void
     {
-        $this->validate();
-
         $this->form->update();
 
-        $this->modal = false;
+        $this->updateModal = false;
         $this->success(__('Updated successfully.'));
         $this->dispatch('customer::reload')->to('customers.index');
     }

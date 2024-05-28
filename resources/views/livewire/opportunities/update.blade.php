@@ -1,5 +1,4 @@
-<x-drawer wire:model="modal" title="{{__('Update Opportunity')}}" class="w-1/3 p-4" right>
-    <x-card>
+<x-drawer wire:model="modal" title="{{__('Update Opportunity')}}" class="w-1/3 p-4" right with-close-button>
         <x-form wire:submit="save" id="update-opportunity-form">
             <hr class="my-5" />
             <div class="space-y-2">
@@ -29,6 +28,5 @@
                 <x-button label="{{__('Save')}}" type="submit" form="update-opportunity-form" />
             </x-slot:actions>
         </x-form>
-    </x-card>
 
 </x-drawer>

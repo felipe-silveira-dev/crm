@@ -14,7 +14,7 @@ class Create extends Component
     /** @var \App\Livewire\Customers\Form $form */
     public Form $form;
 
-    public bool $modal = false;
+    public bool $createModal = false;
 
     public function render(): View
     {
@@ -25,14 +25,14 @@ class Create extends Component
     public function open(): void
     {
         $this->form->resetErrorBag();
-        $this->modal = true;
+        $this->createModal = true;
     }
 
     public function save(): void
     {
         $this->form->create();
 
-        $this->modal = false;
+        $this->createModal = false;
         $this->success(__('Created successfully.'));
         $this->dispatch('customer::reload')->to('customers.index');
     }
