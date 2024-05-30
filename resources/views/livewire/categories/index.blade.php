@@ -54,8 +54,8 @@
 
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
-    {{-- <livewire:opportunities.create />
-    <livewire:opportunities.update />
-    <livewire:opportunities.archive />
-    <livewire:opportunities.restore /> --}}
+    <livewire:categories.create />
+    {{-- <livewire:categories.update /> --}}
+    {{-- <livewire:categories.archive /> --}}
+    {{-- <livewire:categories.restore /> --}}
 </div>
