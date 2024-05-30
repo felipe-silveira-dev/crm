@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('/admin')->middleware('can:' . Can::BE_AN_ADMIN->value)->group(function () {
         Route::get('/', Dashboard::class)->name('admin.dashboard');
         Route::get('/users', Index::class)->name('admin.users');
+        Route::get('/categories', fn () => 'Categories')->name('admin.categories');
     });
     #endregion
 
