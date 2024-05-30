@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\User;
+use App\Livewire\Categories;
+use App\Models\{Category, User};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Livewire;
 
@@ -35,10 +36,9 @@ it('should list all categories in the page', function () {
 });
 
 it('should be able to filter by title', function () {
-    $user     = User::factory()->admin()->create(['name' => 'John Doe']);
-    $customer = Customer::factory()->create(['name' => 'Zack']);
-    $mario    = Category::factory()->create(['title' => 'Joe Doe', 'customer_id' => $customer->id]);
-    $joe      = Category::factory()->create(['title' => 'Mario', 'customer_id' => $customer->id]);
+    $user  = User::factory()->admin()->create(['name' => 'John Doe']);
+    $mario = Category::factory()->create(['title' => 'Joe Doe']);
+    $joe   = Category::factory()->create(['title' => 'Mario']);
 
     actingAs($user);
 
@@ -90,9 +90,6 @@ test('check the table format', function () {
         ->assertSet('headers', [
             ['key' => 'id', 'label' => '#', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
             ['key' => 'title', 'label' => __('Title'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'customer_name', 'label' => __('Customer'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'status', 'label' => __('Status'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
-            ['key' => 'amount', 'label' => __('Amount'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
         ]);
 });
 

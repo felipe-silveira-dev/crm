@@ -36,6 +36,7 @@
                     <x-menu-sub title="Admin" icon="o-lock-closed">
                         <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" route="admin.dashboard"  />
                         <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" route="admin.users"  />
+                        <x-menu-item title="{{__('Categories')}}" icon="o-folder" link="{{ route('admin.categories') }}" route="admin.categories"  />
                     </x-menu-sub>
                 @endcan
 
