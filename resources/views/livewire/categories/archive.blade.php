@@ -1,6 +1,6 @@
 <x-modal wire:model="modal"
          title="{{__('Archive Confirmation')}}"
-         subtitle="{{__('You are archive the category :name', ['name' => $category?->name])}}">
+         subtitle="{{__('You are archive the category :title', ['title' => $category?->title])}}">
 
     <x-slot:actions>
         <x-button label="{{__('Cancel')}}" @click="$wire.modal = false" />
