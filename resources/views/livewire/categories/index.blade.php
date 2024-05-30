@@ -56,6 +56,6 @@
 
     <livewire:categories.create />
     <livewire:categories.update />
-    {{-- <livewire:categories.archive /> --}}
+    <livewire:categories.archive />
     {{-- <livewire:categories.restore /> --}}
 </div>

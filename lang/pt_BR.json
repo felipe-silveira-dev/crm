@@ -265,5 +265,13 @@
     "Updated successfully.": "Atualizado com sucesso.",
     "edit": "editar",
     "Update User": "Atualizar Usuário",
-    "Update user": "Atualizar usuário"
+    "Update user": "Atualizar usuário",
+    "category": "categoria",
+    "Category": "Categoria",
+    "Categories": "Categorias",
+    "Create Category": "Criar Categoria",
+    "Create category": "Criar categoria",
+    "Update Category": "Atualizar Categoria",
+    "Update category": "Atualizar categoria",
+    "You are archive the category :name": "Você está arquivando a categoria :name"
 }
