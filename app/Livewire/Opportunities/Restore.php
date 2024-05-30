@@ -13,6 +13,7 @@ class Restore extends Component
     use Toast;
 
     public Opportunity $opportunity;
+
     public bool $modal = false;
 
     public function render(): View

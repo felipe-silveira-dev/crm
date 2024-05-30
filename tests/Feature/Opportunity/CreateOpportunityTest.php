@@ -14,7 +14,6 @@ beforeEach(function () {
 it('should create a opportunity', function () {
     $customer = Customer::factory()->create();
 
-
     Livewire::test(Opportunities\Create::class)
         ->set('form.customer_id', $customer->id)
         ->set('form.title', 'John Doe')

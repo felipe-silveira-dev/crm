@@ -9,9 +9,10 @@ use Livewire\Form as BaseForm;
 class Form extends BaseForm
 {
     public ?User $user = null;
-    public ?string $name = null;
-    public ?string $email = null;
 
+    public ?string $name = null;
+
+    public ?string $email = null;
 
     public function rules(): array
     {

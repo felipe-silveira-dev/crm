@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Customers;
+namespace App\Livewire\Categories;
 
-use App\Models\Customer;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -12,27 +12,27 @@ class Restore extends Component
 {
     use Toast;
 
-    public Customer $customer;
+    public Category $category;
 
     public bool $modal = false;
 
     public function render(): View
     {
-        return view('livewire.customers.restore');
+        return view('livewire.categories.restore');
     }
 
-    #[On('customer::restore')]
+    #[On('category::restore')]
     public function confirmAction(int $id): void
     {
-        $this->customer = Customer::query()->onlyTrashed()->findOrFail($id);
+        $this->category = Category::query()->onlyTrashed()->findOrFail($id);
         $this->modal    = true;
     }
 
     public function restore(): void
     {
-        $this->customer->restore();
+        $this->category->restore();
         $this->modal = false;
         $this->success(__('Restored successfully.'));
-        $this->dispatch('customer::reload')->to('customers.index');
+        $this->dispatch('category::reload')->to('categories.index');
     }
 }

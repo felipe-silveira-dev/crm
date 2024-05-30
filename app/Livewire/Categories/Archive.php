@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Opportunities;
+namespace App\Livewire\Categories;
 
-use App\Models\Opportunity;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -12,27 +12,27 @@ class Archive extends Component
 {
     use Toast;
 
-    public Opportunity $opportunity;
+    public Category $category;
 
     public bool $modal = false;
 
     public function render(): View
     {
-        return view('livewire.opportunities.archive');
+        return view('livewire.categories.archive');
     }
 
-    #[On('opportunity::archive')]
+    #[On('category::archive')]
     public function confirmAction(int $id): void
     {
-        $this->opportunity = Opportunity::findOrFail($id);
-        $this->modal       = true;
+        $this->category = Category::findOrFail($id);
+        $this->modal    = true;
     }
 
     public function archive(): void
     {
-        $this->opportunity->delete();
+        $this->category->delete();
         $this->modal = false;
         $this->success(__('Archived successfully.'));
-        $this->dispatch('opportunity::reload')->to('opportunities.index');
+        $this->dispatch('category::reload')->to('categories.index');
     }
 }
