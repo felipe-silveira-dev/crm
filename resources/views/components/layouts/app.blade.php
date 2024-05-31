@@ -21,7 +21,7 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" class="pt-3 border-r border-neutral">
+        <x-slot:sidebar drawer="main-drawer" class="pt-3 border-r border-neutral" collapsible>
 
             <!-- Hidden when collapsed -->
             <div class="ml-5 text-4xl font-black hidden-when-collapsed">Strategy</div>

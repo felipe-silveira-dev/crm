@@ -1,5 +1,4 @@
 <x-drawer
- @keydown.window.escape="$wire.createModal = false"
  wire:model="createModal" title="{{__('Create Opportunity')}}" class="w-1/3 p-4" right with-close-button>
     <x-form wire:submit="save" id="create-opportunity-form">
         <div class="space-y-2">

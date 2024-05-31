@@ -44,6 +44,7 @@ class Index extends Component
         return [
             Header::make('id', '#'),
             Header::make('title', __('Title')),
+            Header::make('code', __('Code')),
             Header::make('category_name', __('Category')),
             Header::make('amount', __('Amount')),
         ];

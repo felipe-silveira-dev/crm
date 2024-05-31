@@ -91,6 +91,7 @@ test('check the table format', function () {
         ->assertSet('headers', [
             ['key' => 'id', 'label' => '#', 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
             ['key' => 'title', 'label' => __('Title'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
+            ['key' => 'code', 'label' => __('Code'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
             ['key' => 'category_name', 'label' => __('Category'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
             ['key' => 'amount', 'label' => __('Amount'), 'sortColumnBy' => 'id', 'sortDirection' => 'asc'],
         ]);

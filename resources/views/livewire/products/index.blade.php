@@ -35,6 +35,12 @@
             <x-table.th :$header name="title" />
         @endscope
 
+        {{-- Code --}}
+        @scope('header_code', $header)
+            <x-table.th :$header name="code" />
+        @endscope
+
+        {{-- Category --}}
         @scope('header_category', $header)
             <x-table.th :$header name="category" />
         @endscope
@@ -69,7 +75,7 @@
 
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
-    {{-- <livewire:products.create /> --}}
+    <livewire:products.create />
     {{-- <livewire:products.update /> --}}
     {{-- <livewire:products.archive /> --}}
     {{-- <livewire:products.restore /> --}}
