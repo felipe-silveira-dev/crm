@@ -48,6 +48,7 @@ class Form extends BaseForm
 
         $this->product->category_id = $this->category_id;
         $this->product->title       = $this->title;
+        $this->product->code        = $this->code;
         $this->product->amount      = $this->getAmountAsInt();
 
         $this->product->update();

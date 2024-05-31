@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Products;
-use App\Models\{Category, User};
+use App\Models\{Category, Product, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\{actingAs, assertDatabaseHas};
@@ -9,12 +9,14 @@ use function Pest\Laravel\{actingAs, assertDatabaseHas};
 beforeEach(function () {
     $user = User::factory()->create();
     actingAs($user);
+    $this->product = Product::factory()->create();
 });
 
-it('should create a product', function () {
+it('should update a product', function () {
     $category = Category::factory()->create();
 
-    Livewire::test(Products\Create::class)
+    Livewire::test(Products\Update::class)
+        ->call('load', $this->product->id)
         ->set('form.category_id', $category->id)
         ->set('form.title', 'John Doe')
         ->assertPropertyWired('form.title')
@@ -35,7 +37,7 @@ it('should create a product', function () {
 
 describe('validations', function () {
     test('category_id', function ($rule, $value) {
-        Livewire::test(Products\Create::class)
+        Livewire::test(Products\Update::class)
             ->set('form.category_id', $value)
             ->call('save')
             ->assertHasErrors(['form.category_id' => $rule]);
@@ -45,7 +47,7 @@ describe('validations', function () {
     ]);
 
     test('title', function ($rule, $value) {
-        Livewire::test(Products\Create::class)
+        Livewire::test(Products\Update::class)
             ->set('form.title', $value)
             ->call('save')
             ->assertHasErrors(['form.title' => $rule]);
@@ -56,7 +58,7 @@ describe('validations', function () {
     ]);
 
     test('code', function ($rule, $value) {
-        Livewire::test(Products\Create::class)
+        Livewire::test(Products\Update::class)
             ->set('form.title', 'John Doe')
             ->set('form.code', $value)
             ->call('save')
@@ -67,7 +69,7 @@ describe('validations', function () {
     ]);
 
     test('amount', function ($rule, $value) {
-        Livewire::test(Products\Create::class)
+        Livewire::test(Products\Update::class)
             ->set('form.title', 'John Doe')
             ->set('form.code', 'open')
             ->set('form.amount', $value)

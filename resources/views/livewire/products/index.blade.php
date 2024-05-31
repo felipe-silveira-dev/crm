@@ -76,7 +76,7 @@
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
     <livewire:products.create />
-    {{-- <livewire:products.update /> --}}
+    <livewire:products.update />
     {{-- <livewire:products.archive /> --}}
     {{-- <livewire:products.restore /> --}}
 </div>
