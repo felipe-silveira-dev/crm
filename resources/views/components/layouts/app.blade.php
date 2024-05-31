@@ -44,6 +44,7 @@
                 <x-menu-item title="{{__('Board')}}" icon="o-chart-bar-square" link="{{route('dashboard')}}" route="dashboard" />
                 <x-menu-item title="{{__('Customers')}}" icon="o-building-storefront" link="{{route('customers')}}" route="customers" />
                 <x-menu-item title="{{__('Opportunities')}}" icon="o-currency-dollar" link="{{route('opportunities')}}" route="opportunities" />
+                <x-menu-item title="{{__('Products')}}" icon="o-archive-box" link="{{route('products')}}" route="products" />
 
                 <!-- User -->
                 @if ($user = auth()->user())
