@@ -78,5 +78,5 @@
     <livewire:products.create />
     <livewire:products.update />
     <livewire:products.archive />
-    {{-- <livewire:products.restore /> --}}
+    <livewire:products.restore />
 </div>

@@ -278,5 +278,7 @@
     "Search products...": "Buscar Produtos...",
     "Products": "Produtos",
     "Create Product": "Criar Produto",
-    "Update Product": "Atualizar Produto"
+    "Update Product": "Atualizar Produto",
+    "You are archive the product :title": "Você está arquivando o produto :title",
+    "You are restoring product :title": "Você está restaurando o produto :title"
 }
