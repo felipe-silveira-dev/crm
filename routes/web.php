@@ -47,3 +47,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 #endregion
+
+Route::get('/editorjs', Products\Create::class)->name('editorjs');

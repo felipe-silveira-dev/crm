@@ -1,5 +1,5 @@
-<x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-6/12" right with-close-button>
+{{-- <x-drawer
+ wire:model="createModal" title="{{__('Create Product')}}" class="w-6/12" right with-close-button> --}}
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 
@@ -21,7 +21,7 @@
                     wire:model="form.description"
                     editorId="description"
                     placeholder="{{__('Description')}}"
-                    class="border border-primary h-96 overflow-y-auto"
+                    class=""
                     uploadDisk="public"
                     imagePath="products"
                     label="{{__('Description')}}"
@@ -41,4 +41,4 @@
             <x-button label="{{__('Save')}}" type="submit" form="create-product-form" />
         </x-slot:actions>
     </x-form>
-</x-drawer>
+{{-- </x-drawer> --}}
