@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-1/3 p-4" right with-close-button>
+ wire:model="createModal" title="{{__('Create Product')}}" right with-close-button>
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 
@@ -14,6 +14,16 @@
 
             <x-input label="{{__('Title')}}" wire:model="form.title" />
             <x-input label="{{__('Code')}}" wire:model="form.code" />
+
+            @dump($this->form->description)
+            <x-trix-editor
+                model="{{Product::class}}"
+                field="form.description"
+                :options="['disk' => 'local']"
+                wire:model="form.description"
+            />
+            {{-- <input id="x" type="hidden" wire:model="form.description">
+            @trix(\App\Models\Product::class, 'form.description', ['disk' => 'local']) --}}
 
             <x-input
                 label="{{__('Amount')}}"

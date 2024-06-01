@@ -195,6 +195,9 @@ return [
         'category'              => 'categoria',
         'blood_type'            => 'tipo sanguíneo',
         'birth_date'            => 'data de nascimento',
+        'category_id'           => 'categoria',
+        'code'                  => 'código',
+        'amount'                => 'valor',
     ],
 
 ];

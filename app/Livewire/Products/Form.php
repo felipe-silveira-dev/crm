@@ -9,14 +9,11 @@ use Livewire\Form as BaseForm;
 class Form extends BaseForm
 {
     public ?Product $product = null;
-
     public string $title = '';
-
     public string $code = '';
-
     public ?string $amount = null;
-
     public ?int $category_id = null;
+    public mixed $description = null;
 
     public function rules(): array
     {
@@ -25,6 +22,7 @@ class Form extends BaseForm
             'code'        => 'required|max:255',
             'amount'      => 'required',
             'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string'
         ];
     }
 
@@ -56,7 +54,9 @@ class Form extends BaseForm
 
     public function create(): void
     {
+        dd($this);
         $this->validate();
+
 
         Product::create([
             'category_id' => $this->category_id,
