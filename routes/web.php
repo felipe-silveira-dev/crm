@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Can;
+use App\Http\Controllers\TrixFileUploadController;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Users\Index;
 use App\Livewire\Auth\Password\{Recovery, Reset};
@@ -46,4 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     #endregion
 
 });
+#endregion
+
+#region Trix File Upload
+Route::post('/trix-attachments', TrixFileUploadController::class);
 #endregion

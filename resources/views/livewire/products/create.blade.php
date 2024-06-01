@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-1/3 p-4" right with-close-button>
+ wire:model="createModal" title="{{__('Create Product')}}" class="w-6/12 p-4" right with-close-button>
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 
@@ -14,6 +14,11 @@
 
             <x-input label="{{__('Title')}}" wire:model="form.title" />
             <x-input label="{{__('Code')}}" wire:model="form.code" />
+
+            <div class="flex flex-col space-y-2">
+                <label for="description" class="ml-1 text-sm font-bold">{{__('Description')}}</label>
+                <x-trix-editor id="description" entangle="form.description" />
+            </div>
 
             <x-input
                 label="{{__('Amount')}}"
