@@ -15,7 +15,7 @@
             <x-input label="{{__('Title')}}" wire:model="form.title" />
             <x-input label="{{__('Code')}}" wire:model="form.code" />
 
-            <div class="flex flex-col space-y-2">
+            <div class="flex flex-col space-y-2 h-96">
                 <label for="quill" class="font-bold text-sm ml-1">{{__('Description')}}</label>
                 <livewire:quill
                     quillId="description"
@@ -24,14 +24,15 @@
                 >
             </div>
 
-
-            <x-input
-                label="{{__('Amount')}}"
-                wire:model="form.amount"
-                prefix="R$"
-                locale="pt-BR"
-                money
-            />
+            <div class="">
+                <x-input
+                    label="{{__('Amount')}}"
+                    wire:model="form.amount"
+                    prefix="R$"
+                    locale="pt-BR"
+                    money
+                />
+            </div>
         </div>
         <x-slot:actions>
             <x-button label="{{__('Cancel')}}" @click="$wire.createModal = false" />

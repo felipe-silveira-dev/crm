@@ -1,9 +1,22 @@
-<div wire:ignore class="bg-white text-black">
+<div wire:ignore class="bg-white text-black h-full">
+    <style>
+        .ql-editor .ql-blank {
+            background: #fff;
+        }
+        .ql-container .ql-snow {}
+        #{{ $quillId }} {
+            height: 100%;
+            border: none;
+        }
+        .ql-toolbar {
+        }
+        .ql-blank {}
+    </style>
     <!-- Snow theme stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 
     <!-- Editor container -->
-    <div id="{{ $quillId }}">
+    <div id="{{ $quillId }}" class="h-full">
         {!! $value !!}
     </div>
 
