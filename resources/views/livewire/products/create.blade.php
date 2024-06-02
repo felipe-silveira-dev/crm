@@ -19,8 +19,8 @@
                 <label for="quill" class="font-bold text-sm ml-1">{{__('Description')}}</label>
                 <livewire:quill
                     quillId="description"
+                    component="products.create"
                     :value="$form->description"
-                    wire:model="form.description"
                 >
             </div>
 

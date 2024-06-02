@@ -37,7 +37,7 @@ class Create extends Component
         $this->dispatch('product::reload')->to('products.index');
     }
 
-    #[On('teste-cabuloso')]
+    #[On('description::updated')] // This is a custom event that is dispatched from the Quill component
     public function updatedDescription($value): void
     {
         $this->form->description = $value;

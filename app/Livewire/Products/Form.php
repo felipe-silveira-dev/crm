@@ -4,6 +4,7 @@ namespace App\Livewire\Products;
 
 use App\Models\{Category, Product};
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 use Livewire\Form as BaseForm;
 
 class Form extends BaseForm
@@ -26,7 +27,7 @@ class Form extends BaseForm
     {
         return [
             'title'       => 'required|min:3|max:255',
-            'code'        => 'required|max:255',
+            'code'        => ['required', 'min:3', 'max:255', Rule::unique('products')->ignore($this->product)],
             'amount'      => 'required',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',

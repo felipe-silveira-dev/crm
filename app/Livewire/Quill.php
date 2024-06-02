@@ -11,15 +11,18 @@ class Quill extends Component
 
     public ?string $value = null;
 
-    public function mount(string $quillId, string $value = null): void
+    public string $component;
+
+    public function mount(string $quillId, string $component, string $value = null): void
     {
-        $this->quillId = $quillId;
-        $this->value   = $value;
+        $this->quillId   = $quillId;
+        $this->component = $component;
+        $this->value     = $value;
     }
 
     public function updatedValue(): void
     {
-        $this->dispatch('teste-cabuloso', $this->value);
+        $this->dispatch("{$this->quillId}::updated", $this->value)->to($this->component);
     }
 
     public function render(): View
