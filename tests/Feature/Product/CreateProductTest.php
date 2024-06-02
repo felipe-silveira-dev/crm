@@ -22,6 +22,7 @@ it('should create a product', function () {
         ->assertPropertyWired('form.code')
         ->set('form.amount', '125.00')
         ->assertPropertyWired('form.amount')
+        ->set('form.description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
         ->call('save')
         ->assertHasNoErrors();
 
@@ -30,6 +31,7 @@ it('should create a product', function () {
         'title'       => 'John Doe',
         'code'        => '123456',
         'amount'      => '12500',
+        'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     ]);
 });
 
@@ -56,6 +58,23 @@ describe('validations', function () {
     ]);
 
     test('code', function ($rule, $value) {
+        if ($rule === 'unique') {
+            $category = Category::factory()->create();
+            $product  = $category->products()->create([
+                'title'  => 'John Doe',
+                'code'   => 'open',
+                'amount' => 12500,
+            ]);
+
+            Livewire::test(Products\Create::class)
+                ->set('form.title', 'John Doe')
+                ->set('form.code', $product->code)
+                ->call('save')
+                ->assertHasErrors(['form.code' => $rule]);
+
+            return;
+        }
+
         Livewire::test(Products\Create::class)
             ->set('form.title', 'John Doe')
             ->set('form.code', $value)
@@ -64,6 +83,7 @@ describe('validations', function () {
     })->with([
         'required' => ['required', ''],
         'max'      => ['max', str_repeat('a', 256)],
+        'unique'   => ['unique', 'open'],
     ]);
 
     test('amount', function ($rule, $value) {
@@ -76,4 +96,5 @@ describe('validations', function () {
     })->with([
         'required' => ['required', ''],
     ]);
+
 });
