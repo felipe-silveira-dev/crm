@@ -21,10 +21,10 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" class="p-2 border-r border-dashed border-primary border-opacity-50" collapsible>
+        <x-slot:sidebar drawer="main-drawer" class="border-r border-dashed border-primary border-opacity-50" collapsible>
 
             <!-- Hidden when collapsed -->
-            <div class="ml-5 text-4xl font-black hidden-when-collapsed">
+            <div class="ml-3 text-4xl font-black hidden-when-collapsed">
                 <div class="flex">
                     <x-logo class="w-10 h-10" />
                     STTG
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Display when collapsed -->
-            <div class="ml-5 text-4xl font-black display-when-collapsed">
+            <div class="ml-3 text-4xl font-black display-when-collapsed">
                 <x-logo class="w-10 h-10" />
             </div>
 

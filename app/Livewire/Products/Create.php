@@ -42,6 +42,7 @@ class Create extends Component
     {
         $this->form->description = $value;
     }
+
     public function search(string $value = ''): void
     {
         $this->form->searchCategory($value);

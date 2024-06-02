@@ -23,7 +23,7 @@
             />
 
             <div class="flex flex-col space-y-2">
-                <label for="quill" class="font-bold text-sm ml-1">{{__('Description')}}</label>
+                <label for="description" class="font-bold text-sm ml-1">{{__('Description')}}</label>
                 <livewire:quill
                     quillId="description"
                     component="products.create"
