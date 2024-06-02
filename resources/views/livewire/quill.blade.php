@@ -8,9 +8,10 @@
             height: 100%;
             border: none;
         }
-        .ql-toolbar {
-        }
+        .ql-toolbar {}
         .ql-blank {}
+        .ql-preview {}
+        .ql-tooltip .ql-editing input[type="text"] {}
     </style>
     <!-- Snow Theme stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
@@ -56,8 +57,8 @@
         <span class="ql-formats">
           <button class="ql-link"></button>
           <button class="ql-image"></button>
-          <button class="ql-video"></button>
-          <button class="ql-formula"></button>
+          {{-- <button class="ql-video"></button> --}}
+          {{-- <button class="ql-formula"></button> Require KaTeX --}}
         </span>
         <span class="ql-formats">
           <button class="ql-clean"></button>

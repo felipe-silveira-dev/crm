@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="business" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" class="pt-3 border-r border-neutral" collapsible>
+        <x-slot:sidebar drawer="main-drawer" class="p-2 border-r border-dashed border-primary border-opacity-50" collapsible>
 
             <!-- Hidden when collapsed -->
             <div class="ml-5 text-4xl font-black hidden-when-collapsed">

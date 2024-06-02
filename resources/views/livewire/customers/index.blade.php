@@ -57,7 +57,9 @@
         @endscope
     </x-table>
 
-    {{ $this->items->links(data: ['scrollTo' => false]) }}
+    <div class="mt-4">
+        {{ $this->items->links(data: ['scrollTo' => false]) }}
+    </div>
 
     <livewire:customers.create />
     <livewire:customers.update />

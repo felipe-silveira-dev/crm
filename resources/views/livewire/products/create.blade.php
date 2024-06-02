@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-full w-6/12 " right with-close-button>
+ wire:model="createModal" title="{{__('Create Product')}}" class="w-6/12 " right with-close-button>
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 

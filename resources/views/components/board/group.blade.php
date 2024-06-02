@@ -3,7 +3,7 @@
     'items'
 ])
 
-<div class="border border-primary p-2" wire:key="group-{{ $status }}">
+<div class="border border-primary p-2 bg-base-200 rounded-lg" wire:key="group-{{ $status }}">
     <x-header
         title="{{__($status)}}"
         size="text-xl"
@@ -26,7 +26,7 @@
                 wire:key="item-{{ $item->id }}"
                 wire:sortable-group.handle
             >
-                <x-card class="rounded-none bg-base-200 border-dashed border-primary border border-opacity-50 p-2 shadow-md cursor-grab">
+                <x-card class="border-dashed border-primary border border-opacity-50 p-2 shadow-md cursor-grab">
                     {{ $item->title }}
                 </x-card>
             </li>
