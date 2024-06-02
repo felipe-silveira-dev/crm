@@ -37,6 +37,11 @@ class Create extends Component
         $this->dispatch('product::reload')->to('products.index');
     }
 
+    #[On('teste-cabuloso')]
+    public function updatedDescription($value): void
+    {
+        $this->form->description = $value;
+    }
     public function search(string $value = ''): void
     {
         $this->form->searchCategory($value);

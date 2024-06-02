@@ -18,6 +18,10 @@ class Form extends BaseForm
 
     public ?int $category_id = null;
 
+    public ?string $description = null;
+
+    public Collection|array $categories = [];
+
     public function rules(): array
     {
         return [
@@ -25,10 +29,9 @@ class Form extends BaseForm
             'code'        => 'required|max:255',
             'amount'      => 'required',
             'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
         ];
     }
-
-    public Collection|array $categories = [];
 
     public function setProduct(Product $product): void
     {
@@ -38,6 +41,7 @@ class Form extends BaseForm
         $this->title       = $product->title;
         $this->code        = $product->code;
         $this->amount      = (string) ($product->amount / 100);
+        $this->description = $product->description;
 
         $this->searchCategory();
     }
@@ -50,6 +54,7 @@ class Form extends BaseForm
         $this->product->title       = $this->title;
         $this->product->code        = $this->code;
         $this->product->amount      = $this->getAmountAsInt();
+        $this->product->description = $this->description;
 
         $this->product->update();
     }
@@ -63,6 +68,7 @@ class Form extends BaseForm
             'title'       => $this->title,
             'code'        => $this->code,
             'amount'      => $this->getAmountAsInt(),
+            'description' => $this->description,
         ]);
 
         $this->reset();

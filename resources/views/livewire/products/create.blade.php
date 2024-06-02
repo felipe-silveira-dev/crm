@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-1/3 p-4" right with-close-button>
+ wire:model="createModal" title="{{__('Create Product')}}" class="w-full w-6/12 " right with-close-button>
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 
@@ -14,6 +14,16 @@
 
             <x-input label="{{__('Title')}}" wire:model="form.title" />
             <x-input label="{{__('Code')}}" wire:model="form.code" />
+
+            <div class="flex flex-col space-y-2">
+                <label for="quill" class="font-bold text-sm ml-1">{{__('Description')}}</label>
+                <livewire:quill
+                    quillId="description"
+                    :value="$form->description"
+                    wire:model="form.description"
+                >
+            </div>
+
 
             <x-input
                 label="{{__('Amount')}}"

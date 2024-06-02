@@ -3,11 +3,11 @@
     'items'
 ])
 
-<div class="bg-base-200 p-2" wire:key="group-{{ $status }}">
+<div class="border border-primary p-2" wire:key="group-{{ $status }}">
     <x-header
         title="{{__($status)}}"
         size="text-xl"
-        class="px-2 pb-0 mb-2 capitalize"
+        class="px-2 pb-0 mb-2 capitalize border-b border-primary"
         subtitle="{{__('Total :count Opportunities', ['count' => $items->count()])}}"
     />
     <ul
@@ -16,7 +16,7 @@
         class="space-y-2 px-2"
     >
         @empty($items->count())
-            <li wire:key='"opportunity-null' class="h-10 border-dashed border-gray-400 border rounded w-full text-center flex items-center justify-center opacity-40">
+            <li wire:key='"opportunity-null' class="h-10 border-dashed border-primary border w-full text-center flex items-center justify-center opacity-40">
                 {{__('Empty List')}}
             </li>
         @endempty
@@ -26,7 +26,7 @@
                 wire:key="item-{{ $item->id }}"
                 wire:sortable-group.handle
             >
-                <x-card class="bg-base-100 p-2 rounded-md shadow-md cursor-grab">
+                <x-card class="rounded-none bg-base-200 border-dashed border-primary border border-opacity-50 p-2 shadow-md cursor-grab">
                     {{ $item->title }}
                 </x-card>
             </li>

@@ -24,10 +24,17 @@
         <x-slot:sidebar drawer="main-drawer" class="pt-3 border-r border-neutral" collapsible>
 
             <!-- Hidden when collapsed -->
-            <div class="ml-5 text-4xl font-black hidden-when-collapsed">Strategy</div>
+            <div class="ml-5 text-4xl font-black hidden-when-collapsed">
+                <div class="flex">
+                    <x-logo class="w-10 h-10" />
+                    STTG
+                </div>
+            </div>
 
             <!-- Display when collapsed -->
-            <div class="ml-5 text-4xl font-black display-when-collapsed">ST</div>
+            <div class="ml-5 text-4xl font-black display-when-collapsed">
+                <x-logo class="w-10 h-10" />
+            </div>
 
             <x-menu activate-by-route>
 
