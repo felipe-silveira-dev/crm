@@ -12,9 +12,6 @@
         }
     </style>
 
-    <!-- Snow Theme stylesheet -->
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
-
     <!-- Toolbar container -->
     <div id="toolbar-container-{{ $quillId }}">
         <span class="ql-formats">
@@ -67,32 +64,41 @@
         {!! $value !!}
     </div>
 
-    <!-- Quill library -->
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    @assets
+        <!-- Snow Theme stylesheet -->
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+        <!-- Quill library -->
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    @endassets
+
 
     <!-- Initialize Quill editor -->
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-                var quill = new Quill('#{{ $quillId }}', {
-                modules: {
-                    syntax: true,
-                    toolbar: "#toolbar-container-{{ $quillId }}",
-                },
-                theme: 'snow',
-                placeholder: "{{__('Compose an epic...')}}",
-            });
+    @script
+        <script>
+            window.addEventListener('livewire:navigated', (event) => {
+                    var quill = new Quill('#{{ $quillId }}', {
+                    modules: {
+                        syntax: true,
+                        toolbar: "#toolbar-container-{{ $quillId }}",
+                    },
+                    theme: 'snow',
+                    placeholder: "{{__('Compose an epic...')}}",
+                });
 
-            quill.on('text-change', function() {
-                @this.set('value', quill.root.innerHTML);
-            });
+                quill.on('text-change', function() {
+                    @this.set('value', quill.root.innerHTML);
+                });
 
-            @this.on('quill::load', (value) => {
-                quill.root.innerHTML = value;
-            });
+                @this.on('quill::load', (value) => {
+                    quill.root.innerHTML = value;
+                });
 
-            @this.on('quill::reset', () => {
-                quill.root.innerHTML = '';
-            });
-        });
-    </script>
+                @this.on('quill::reset', () => {
+                    quill.root.innerHTML = '';
+                });
+            },
+                { once: true }
+            );
+        </script>
+    @endscript
 </div>
