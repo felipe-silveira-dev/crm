@@ -27,7 +27,7 @@ class Form extends BaseForm
     {
         return [
             'title'       => 'required|min:3|max:255',
-            'code'        => ['required', 'min:3', 'max:255', Rule::unique('products')->ignore($this->product)],
+            'code'        => ['required', 'min:3', 'max:255', Rule::unique('products')->ignore($this->product?->id)],
             'amount'      => 'required',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
