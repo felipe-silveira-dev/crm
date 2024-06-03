@@ -25,6 +25,7 @@ class Create extends Component
     {
         $this->form->resetErrorBag();
         $this->search();
+        $this->dispatch('quill::reset')->to('quill');
         $this->createModal = true;
     }
 
@@ -35,6 +36,12 @@ class Create extends Component
         $this->createModal = false;
         $this->success(__('Created successfully.'));
         $this->dispatch('product::reload')->to('products.index');
+    }
+
+    #[On('description::updated')] // This is a custom event that is dispatched from the Quill component
+    public function updatedDescription($value): void
+    {
+        $this->form->description = $value;
     }
 
     public function search(string $value = ''): void

@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="createModal" title="{{__('Create Product')}}" class="w-1/3 p-4" right with-close-button>
+ wire:model="createModal" title="{{__('Create Product')}}" class="w-6/12 " right with-close-button>
     <x-form wire:submit="save" id="create-product-form">
         <div class="space-y-2">
 
@@ -14,7 +14,6 @@
 
             <x-input label="{{__('Title')}}" wire:model="form.title" />
             <x-input label="{{__('Code')}}" wire:model="form.code" />
-
             <x-input
                 label="{{__('Amount')}}"
                 wire:model="form.amount"
@@ -22,6 +21,15 @@
                 locale="pt-BR"
                 money
             />
+
+            <div class="flex flex-col space-y-2">
+                <label for="description" class="font-bold text-sm ml-1">{{__('Description')}}</label>
+                <livewire:quill
+                    quillId="description"
+                    component="products.create"
+                    :value="$form->description"
+                >
+            </div>
         </div>
         <x-slot:actions>
             <x-button label="{{__('Cancel')}}" @click="$wire.createModal = false" />

@@ -1,5 +1,5 @@
 <x-drawer
- wire:model="updateModal" title="{{__('Update Product')}}" class="w-1/3 p-4" right with-close-button>
+ wire:model="updateModal" title="{{__('Update Product')}}" class="w-6/12" right with-close-button>
     <x-form wire:submit="save" id="update-product-form">
         <div class="space-y-2">
 
@@ -22,6 +22,14 @@
                 locale="pt-BR"
                 money
             />
+
+            <div class="flex flex-col space-y-2">
+                <label for="updateDescription" class="font-bold text-sm ml-1">{{__('Description')}}</label>
+                <livewire:quill
+                    quillId="updateDescription"
+                    component="products.update"
+                >
+            </div>
         </div>
         <x-slot:actions>
             <x-button label="{{__('Cancel')}}" @click="$wire.updateModal = false" />
