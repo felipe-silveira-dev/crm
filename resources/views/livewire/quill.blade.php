@@ -1,25 +1,22 @@
 <div wire:ignore class="bg-white text-black h-full">
     <style>
-        .ql-editor .ql-blank {
-            background: #fff;
-        }
+        .ql-editor .ql-blank {}
         .ql-container .ql-snow {}
-        #{{ $quillId }} {
-            height: 100%;
-            border: none;
-        }
+        #{{ $quillId }} {}
         .ql-toolbar {}
         .ql-blank {}
         .ql-preview {}
         .ql-tooltip .ql-editing input[type="text"] {}
+        .ql-editor .ql-ui {
+            background: #222;
+        }
     </style>
+
     <!-- Snow Theme stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
-    <!-- Quill library -->
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
     <!-- Toolbar container -->
-    <div id="toolbar-container">
+    <div id="toolbar-container-{{ $quillId }}">
         <span class="ql-formats">
           <select class="ql-font"></select>
           <select class="ql-size"></select>
@@ -64,28 +61,38 @@
           <button class="ql-clean"></button>
         </span>
     </div>
+
     <!-- Editor container -->
     <div id="{{ $quillId }}">
         {!! $value !!}
     </div>
 
-
+    <!-- Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
     <!-- Initialize Quill editor -->
     <script>
-        const quill = new Quill('#{{ $quillId }}', {
-            modules: {
-                syntax: true,
-                toolbar: '#toolbar-container',
-            },
-            theme: 'snow',
-            placeholder: "{{__('Compose an epic...')}}",
-        });
+        window.addEventListener('DOMContentLoaded', (event) => {
+                var quill = new Quill('#{{ $quillId }}', {
+                modules: {
+                    syntax: true,
+                    toolbar: "#toolbar-container-{{ $quillId }}",
+                },
+                theme: 'snow',
+                placeholder: "{{__('Compose an epic...')}}",
+            });
 
-        quill.on('text-change', function() {
-            @this.set('value', quill.root.innerHTML);
-        });
+            quill.on('text-change', function() {
+                @this.set('value', quill.root.innerHTML);
+            });
 
+            @this.on('quill::load', (value) => {
+                quill.root.innerHTML = value;
+            });
+
+            @this.on('quill::reset', () => {
+                quill.root.innerHTML = '';
+            });
+        });
     </script>
-
 </div>

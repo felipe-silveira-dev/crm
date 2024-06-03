@@ -26,6 +26,8 @@ class Update extends Component
     {
         $product = Product::query()->whereId($productId)->firstOrFail();
         $this->form->setProduct($product);
+        $this->dispatch('quill::load', $product->description)->to('quill');
+
         $this->form->resetErrorBag();
         $this->updateModal = true;
     }
@@ -37,6 +39,12 @@ class Update extends Component
         $this->updateModal = false;
         $this->success(__('Updated successfully.'));
         $this->dispatch('product::reload')->to('products.index');
+    }
+
+    #[On('updateDescription::updated')] // This is a custom event that is dispatched from the Quill component
+    public function updatedDescription($value): void
+    {
+        $this->form->description = $value;
     }
 
     public function search(string $value = ''): void

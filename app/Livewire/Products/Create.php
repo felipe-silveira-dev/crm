@@ -25,6 +25,7 @@ class Create extends Component
     {
         $this->form->resetErrorBag();
         $this->search();
+        $this->dispatch('quill::reset')->to('quill');
         $this->createModal = true;
     }
 
