@@ -44,6 +44,7 @@
                         <x-menu-item title="{{__('Dashboard')}}" icon="o-chart-bar-square" link="{{ route('admin.dashboard') }}" route="admin.dashboard"  />
                         <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" route="admin.users"  />
                         <x-menu-item title="{{__('Categories')}}" icon="o-folder" link="{{ route('admin.categories') }}" route="admin.categories"  />
+                        <x-menu-item title="{{__('Subscription')}}" icon="o-credit-card" link="{{ route('admin.subscriptions') }}" route="admin.subscriptions" />
                     </x-menu-sub>
                 @endcan
 
@@ -55,6 +56,7 @@
 
                 <!-- User -->
                 @if ($user = auth()->user())
+                    <x-menu-separator />
                     <x-list-item :item="$user" sub-value="username" no-separator no-hover>
                         <x-slot:actions>
                             <div class="tooltip tooltip-left" data-tip="{{__('edit')}}">

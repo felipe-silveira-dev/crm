@@ -42,6 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         #region Categories
         Route::get('/categories', Categories\Index::class)->name('admin.categories');
         #endregion
+
+        #region Subscription
+        Route::get('/subscriptions', fn () => view('subscriptions'))->name('admin.subscriptions');
+        #end Subscription
     });
     #endregion
 
