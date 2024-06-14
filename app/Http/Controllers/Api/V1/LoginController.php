@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Http\Controllers\Api\V1;
 
@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\LoginRequest;
 use App\Models\User;
 use App\Traits\Api\Responses;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -26,7 +25,8 @@ class LoginController extends Controller
         return $this->ok(
             'Authenticated',
             [
-                'token' => $user->createToken('API Token for' . $user->email)->plainTextToken
+                'user'  => $user,
+                'token' => $user->createToken('API Token for' . $user->email)->plainTextToken,
             ]
         );
     }

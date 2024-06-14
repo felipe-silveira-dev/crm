@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Http\Requests\Api\V1;
 
@@ -14,8 +14,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string', 'min:4', 'max:32']
+            'email'    => ['required', 'string', 'email'],
+            'password' => ['required', 'string', 'min:4', 'max:32'],
         ];
     }
 }

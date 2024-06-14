@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Listeners\Auth\CreateValidationCode;
 use App\Livewire\Auth\{EmailValidation, Register};
@@ -41,7 +41,7 @@ describe('after registration', function () {
 
         expect($user->validation_code)->not->toBeNull()
             ->and($user->validation_code)->toBeNumeric();
-        assertTrue(strlen($user->validation_code) === 6);
+        assertTrue(strlen((string)$user->validation_code) === 6);
     });
 
     it('making sure that the listener to send the code is linked to the registered event', function () {

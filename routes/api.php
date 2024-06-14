@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 
 #region
 Route::post('/login', LoginController::class);

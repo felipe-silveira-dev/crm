@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Database\Factories;
 
@@ -16,7 +16,7 @@ class UserFactory extends Factory
     {
         return [
             'name'              => fake()->name(),
-            'email'             => fake()->unique()->safeEmail(),
+            'email'             => Str::random(10) . '@example.com',
             'email_verified_at' => now(),
             'password'          => 'password',
             'remember_token'    => Str::random(10),

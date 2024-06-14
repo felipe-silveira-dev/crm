@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Traits\Api;
 
@@ -17,8 +17,8 @@ trait Responses
     {
         return response()->json([
             'message' => $message,
-            'status' => $statusCode,
-            'data' => $data
+            'status'  => $statusCode,
+            'data'    => $data,
         ], $statusCode);
     }
 
@@ -26,7 +26,7 @@ trait Responses
     {
         return response()->json([
             'message' => $message,
-            'status' => $statusCode
+            'status'  => $statusCode,
         ], $statusCode);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Livewire\Auth\Logout;
 use App\Models\User;

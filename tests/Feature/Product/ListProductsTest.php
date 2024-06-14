@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 use App\Livewire\Products;
 use App\Models\{Customer, Product, User};
