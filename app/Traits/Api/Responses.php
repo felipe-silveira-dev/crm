@@ -13,7 +13,7 @@ trait Responses
         return $this->success($message, $data, 200);
     }
 
-    protected function success(?string $message, array $data, int $statusCode = 200): JsonResponse
+    protected function success(?string $message, array $data = [], int $statusCode = 200): JsonResponse
     {
         return response()->json([
             'message' => $message,
