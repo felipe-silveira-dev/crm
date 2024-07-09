@@ -38,8 +38,8 @@ it('should list all products in the page', function () {
 it('should be able to filter by title', function () {
     $user     = User::factory()->create(['name' => 'John Doe']);
     $customer = Customer::factory()->create(['name' => 'Zack']);
-    $mario    = Product::factory()->create(['title' => 'Joe Doe']);
-    $joe      = Product::factory()->create(['title' => 'Mario']);
+    $joe      = Product::factory()->create(['title' => 'Joe Doe']);
+    $mario    = Product::factory()->create(['title' => 'Mario']);
 
     actingAs($user);
 
