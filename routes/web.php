@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use App\Enums\Can;
+use App\Http\Controllers\Webhooks\HotmartWebhookController;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Users\Index;
 use App\Livewire\Auth\Password\{Recovery, Reset};
@@ -47,3 +48,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 #endregion
+
+#region Webhooks
+Route::middleware('throttle')->prefix('webhooks')->group(function () {
+    Route::post('hotmart', HotmartWebhookController::class)->name('webhooks.hotmart');
+});
