@@ -49,6 +49,15 @@
 
                     <x-button id="archive-btn-{{ $customer->id }}" wire:key="archive-btn-{{ $customer->id }}" class="btn-sm"
                         icon="o-trash" @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" spinner />
+
+                    <a
+                        id="show-btn-{{ $customer->id }}"
+                        wire:key="show-btn-{{ $customer->id }}"
+                        href="{{ route('customers.show', $customer) }}"
+                        class="btn btn-sm normal-case"
+                    >
+                        <x-icon name="o-eye" />
+                    </a>
                 @else
                     <x-button icon="o-arrow-path-rounded-square" @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" spinner
                             class="btn-sm btn-success btn-ghost" />
