@@ -1,11 +1,12 @@
 <?php declare(strict_types = 1);
 
 use App\Enums\Can;
+use App\Http\Controllers\Webhooks\HotmartWebhookController;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Users\Index;
 use App\Livewire\Auth\Password\{Recovery, Reset};
 use App\Livewire\Auth\{EmailValidation, Login, Register};
-use App\Livewire\{Categories, Customers, Opportunities, Products, Welcome};
+use App\Livewire\{Categories, Customers, Opportunities, Products, Webhooks, Welcome};
 use Illuminate\Support\Facades\Route;
 
 #region Loginflow
@@ -47,3 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 #endregion
+
+#region Webhooks
+Route::middleware('throttle')->prefix('webhooks')->group(function () {
+    Route::get('/', Webhooks\Index::class)->name('webhooks')->middleware(['auth', 'verified']);
+
+    Route::post('hotmart', HotmartWebhookController::class)->name('webhooks.hotmart');
+});
