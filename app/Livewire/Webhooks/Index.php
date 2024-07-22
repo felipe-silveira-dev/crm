@@ -26,7 +26,7 @@ class Index extends Component
 
     public function searchColumns(): array
     {
-        return ['provider'];
+        return ['provider', 'status', 'email'];
     }
 
     public function tableHeaders(): array
@@ -34,7 +34,10 @@ class Index extends Component
         return [
             Header::make('id', '#'),
             Header::make('provider', __('Provedor')),
-            Header::make('payload', __('Payload')),
+            Header::make('created_at', __('Recebido em')),
+            Header::make('payload_id', __('Payload ID')),
+            Header::make('status', __('status')),
+            Header::make('email', __('Email')),
         ];
     }
 }

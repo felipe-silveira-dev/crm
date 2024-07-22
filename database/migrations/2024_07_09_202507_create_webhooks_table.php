@@ -12,6 +12,9 @@ return new class () extends Migration {
             $table->string('provider');
             $table->json('headers');
             $table->json('payload');
+            $table->string('payload_id');
+            $table->string('status');
+            $table->string('email');
             $table->timestamps();
         });
     }

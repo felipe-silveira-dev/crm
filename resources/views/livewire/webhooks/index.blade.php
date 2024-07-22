@@ -26,16 +26,37 @@
             <x-table.th :$header name="id" />
         @endscope
 
-        {{-- Title --}}
+        {{-- Provedor --}}
         @scope('header_provider', $header)
             <x-table.th :$header name="provider" />
         @endscope
 
+        @scope('header_created_at', $header)
+            <x-table.th :$header name="created_at" />
+        @endscope
+        @scope('cell_created_at', $webhook)
+            <div class="whitespace-nowrap">{{ $webhook->created_at->format('d/m/Y H:i:s') }}</div>
+        @endscope
 
+        @scope('header_provider', $header)
+            <x-table.th :$header name="status" />
+        @endscope
+
+        @scope('header_provider', $header)
+            <x-table.th :$header name="email" />
+        @endscope
 
         {{-- Actions --}}
-        @scope('actions', $product)
+        @scope('actions', $webhook)
             <div class="flex items-center justify-center gap-2">
+                <a
+                    id="show-btn-{{ $webhook->id }}"
+                    wire:key="show-btn-{{ $webhook->id }}"
+                    {{-- href="{{ route('webhooks.show', $webhook) }}" --}}
+                    class="btn btn-sm normal-case"
+                >
+                    <x-icon name="o-eye" />
+                </a>
             </div>
         @endscope
     </x-table>

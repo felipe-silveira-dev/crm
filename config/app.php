@@ -19,9 +19,9 @@ return [
 
     'locale' => 'pt_BR',
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'pt_BR',
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'pt_BR',
 
     'key' => env('APP_KEY'),
 

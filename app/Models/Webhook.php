@@ -15,5 +15,8 @@ class Webhook extends Model
         'provider',
         'headers',
         'payload',
+        'payload_id',
+        'status',
+        'email',
     ];
 }
