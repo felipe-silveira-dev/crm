@@ -22,3 +22,8 @@ npm install
 php artisan serve
 
 npm run dev
+
+
+---
+sudo chown -R $USER:www-data storage
+chmod +x console.sh

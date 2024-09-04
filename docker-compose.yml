@@ -7,3 +7,24 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: crm
+  php:
+    image: serversideup/php:8.3-fpm-nginx
+    ports:
+      - 80:8080
+      - 8443:8443
+    expose:
+      - 9000
+    environment:
+      SSL_MODE: "off"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+  node:
+    image: node:lts-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: npm run build && npm run dev
+    depends_on:
+      - php
