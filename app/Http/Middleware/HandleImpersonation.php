@@ -10,7 +10,7 @@ class HandleImpersonation
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if($id = session('impersonate')) {
+        if ($id = session('impersonate')) {
             auth()->onceUsingId($id);
         }
 

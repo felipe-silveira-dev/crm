@@ -67,7 +67,7 @@ class Form extends BaseForm
     {
         $amount = $this->amount;
 
-        if($amount === null) {
+        if ($amount === null) {
             $amount = 0;
         }
 

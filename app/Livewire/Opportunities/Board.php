@@ -65,7 +65,7 @@ class Board extends Component
     {
         $order = collect();
 
-        foreach($data as $group) {
+        foreach ($data as $group) {
             $order->push(
                 collect($group['items'])
                     ->map(fn ($i) => $i['value'])
@@ -78,7 +78,7 @@ class Board extends Component
 
     private function updateStatuses(SupportCollection $collection): void
     {
-        foreach(['open', 'won', 'lost'] as $status) {
+        foreach (['open', 'won', 'lost'] as $status) {
             $this->updateStatus($status, $collection);
         }
     }
@@ -95,7 +95,7 @@ class Board extends Component
         $list = $collection[$id];
         $ids  = explode(',', $list);
 
-        if(filled($list)) {
+        if (filled($list)) {
             DB::table('opportunities')->whereIn('id', $ids)->update(['status' => $status]);
         }
     }

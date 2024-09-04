@@ -14,7 +14,7 @@ class ArrayHelper
         $data = [];
 
         // Lendo o arquivo usar ($row = fgetcsv($file, null, ',')) ou $line = fgetcsv($file) e incrementando o contador ($ii++)
-        for($ii = 0; ($row = fgetcsv($file, null, ',')); $ii++) {
+        for ($ii = 0; ($row = fgetcsv($file, null, ',')); $ii++) {
             // Adicionando a linha ao array de dados
             $data[] = $row;
 

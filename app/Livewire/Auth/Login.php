@@ -26,7 +26,7 @@ class Login extends Component
     {
         $this->validate();
 
-        if($this->ensureIsNotRateLimiting()) {
+        if ($this->ensureIsNotRateLimiting()) {
             return;
         }
 

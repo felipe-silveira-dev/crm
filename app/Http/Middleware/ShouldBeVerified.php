@@ -10,7 +10,7 @@ class ShouldBeVerified
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if(is_null($request->user()->email_verified_at)) {
+        if (is_null($request->user()->email_verified_at)) {
             return to_route('auth.email-validation');
         }
 
