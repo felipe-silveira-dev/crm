@@ -1,8 +1,24 @@
-## CRM is a system for small businesses. It is a web application that allows you to manage your business.
+## CRM 
 
+cp .env.example .env
 
-- [] add notify to customer crud
-- [] add notify to opportunity crud
-- [] fix bugs on seach (archived, active, all)
-- [] fechar modal com esc
-- [] filtro por status (opportunity)
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crm
+DB_USERNAME=root
+DB_PASSWORD=password
+
+docker compose up
+
+composer install
+
+php artisan key:generate
+
+php artisan migrate:fresh --seed
+
+npm install
+
+php artisan serve
+
+npm run dev
