@@ -19,17 +19,17 @@ function clear
 
 function unit
 {
-    docker compose exec php /src/vendor/bin/pest tests/Unit "$@"
+    docker compose exec php /var/www/html/vendor/bin/pest tests/Unit "$@"
 }
 
 function feature
 {
-    docker compose exec php /src/vendor/bin/pest tests/Feature "$@"
+    docker compose exec php /var/www/html/vendor/bin/pest tests/Feature "$@"
 }
 
 function tests
 {
-    docker compose exec php /src/vendor/bin/pest tests "$@"
+    docker compose exec php /var/www/html/vendor/bin/pest tests "$@"
 }
 
 function bash
@@ -39,7 +39,7 @@ function bash
 
 function pest
 {
-    docker compose exec php /src/vendor/bin/pest "$@"
+    docker compose exec php /var/www/html/vendor/bin/pest "$@"
 }
 
 function queue
