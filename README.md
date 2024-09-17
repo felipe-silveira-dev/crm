@@ -11,19 +11,14 @@ DB_PASSWORD=password
 
 docker compose up
 
-composer install
+<!-- sudo docker compose exec --user root php chown -R www-data:www-data /var/www/html
+sudo docker compose exec --user root php chmod -R 755 /var/www/html -->
+sudo chown -R $USER:$USER 'project/path'
+sudo chown -R www-data:www-data storage
 
-php artisan key:generate
+./console.sh composer install
 
-php artisan migrate:fresh --seed
-
-npm install
-
-php artisan serve
-
-npm run dev
+./console.sh artisan key:generate
 
 
----
-sudo chown -R $USER:www-data storage
 chmod +x console.sh
