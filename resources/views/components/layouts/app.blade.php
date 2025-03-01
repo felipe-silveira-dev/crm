@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
 </head>
 
-<body class="min-h-screen font-sans antialiased">
+<body class="min-h-screen font-sans antialiased bg-black">
     <x-toast />
     @if (session()->has('impersonate'))
         <livewire:admin.users.stop-impersonate />
@@ -21,19 +21,20 @@
     @endif
 
     <x-main full-width>
-        <x-slot:sidebar drawer="main-drawer" class="collapsible">
+        <x-slot:sidebar drawer="main-drawer" class="collapsible" class="bg-black">
 
             <!-- Hidden when collapsed -->
-            <div class="ml-3 text-4xl font-black hidden-when-collapsed">
-                <div class="flex">
-                    <x-logo class="w-10 h-10" />
-                    STTG
+            <div class="ml-3 text-4xl font-black hidden-when-collapsed flex flex-col border-b border-zinc-950/5 p-4 dark:border-white/5">
+                <div class="relative font-mono">
+                    Silveira
                 </div>
             </div>
 
             <!-- Display when collapsed -->
             <div class="ml-3 text-4xl font-black display-when-collapsed">
-                <x-logo class="w-10 h-10" />
+                <div class="relative font-mono">
+                    Silveira
+                </div>
             </div>
 
             <x-menu activate-by-route>
@@ -81,7 +82,7 @@
         </x-slot:sidebar>
 
         <!-- The `$slot` goes here -->
-        <x-slot:content>
+        <x-slot:content class="bg-zinc-900 rounded-xl border border-zinc-800">
             {{ $slot }}
         </x-slot:content>
     </x-main>
